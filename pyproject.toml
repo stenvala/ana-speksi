@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "bas-spec"
+name = "ana-speksi"
 version = "0.1.0"
 description = "Skill-driven spec development framework combining the best of spec-kit and OpenSpec"
 readme = "README.md"
@@ -15,12 +15,12 @@ authors = [
 dependencies = [
     "typer>=0.15.0",
     "rich>=13.0.0",
-    "pyyaml>=6.0",    
+    "pyyaml>=6.0",
     "toons>=0.5.3",
 ]
 
 [project.scripts]
-bas_spec = "bas_spec.cli:app"
+ana_speksi = "ana_speksi.cli:app"
 
 [tool.hatch.build.targets.wheel]
-packages = ["bas_spec"]
+packages = ["ana_speksi"]
