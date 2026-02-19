@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "bas-spec"
+version = "0.1.0"
+description = "Skill-driven spec development framework combining the best of spec-kit and OpenSpec"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [
+    { name = "Antti Stenvall" },
+]
+dependencies = [
+    "typer>=0.15.0",
+    "rich>=13.0.0",
+    "pyyaml>=6.0",    
+    "toons>=0.5.3",
+]
+
+[project.scripts]
+bas_spec = "bas_spec.cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["bas_spec"]
