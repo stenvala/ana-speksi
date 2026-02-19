@@ -1,25 +1,25 @@
-"""Config loading and injection for ana-speksi."""
+"""Config loading and injection for ana_speksi."""
 
 from __future__ import annotations
 
 from pathlib import Path
 from typing import Any
 
-from ana-speksi.status import get_ana-speksi_root
+from ana_speksi.status import get_ana_speksi_root
 
 
 # ---------------------------------------------------------------------------
-# Project config (ana-speksi/config.yml)
+# Project config (ana_speksi/config.yml)
 # ---------------------------------------------------------------------------
 
 
 def load_config(root: Path | None = None) -> dict[str, Any]:
-    """Load ana-speksi/config.yml and return its contents.
+    """Load ana_speksi/config.yml and return its contents.
 
     Returns an empty dict if the file does not exist or cannot be parsed.
     """
     if root is None:
-        root = get_ana-speksi_root()
+        root = get_ana_speksi_root()
 
     config_path = root / "config.yml"
     if not config_path.exists():
@@ -34,7 +34,7 @@ def load_config(root: Path | None = None) -> dict[str, Any]:
 
 
 def get_auto_confirm(root: Path | None = None) -> bool:
-    """Return the auto_confirm setting from ana-speksi/config.yml."""
+    """Return the auto_confirm setting from ana_speksi/config.yml."""
     cfg = load_config(root)
     return bool(cfg.get("auto_confirm", False))
 

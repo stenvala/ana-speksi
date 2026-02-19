@@ -7,9 +7,9 @@ from pathlib import Path
 
 from rich.console import Console
 
-from ana-speksi.config import inject_config_into_skill, load_config
-from ana-speksi.models import AgentFramework, AGENT_SKILL_PATHS, AGENT_COMMAND_PATHS
-from ana-speksi.resources import (
+from ana_speksi.config import inject_config_into_skill, load_config
+from ana_speksi.models import AgentFramework, AGENT_SKILL_PATHS, AGENT_COMMAND_PATHS
+from ana_speksi.resources import (
     SKILLS_DIR,
     list_skills,
     parse_skill_frontmatter,
@@ -54,7 +54,7 @@ def _copy_resources(src_skill_name: str, dest_dir: Path) -> None:
 
 def generate_skills(project_root: Path, frameworks: list[AgentFramework]) -> None:
     """Generate skill and command files for the selected agent frameworks."""
-    config = load_config(project_root / "ana-speksi")
+    config = load_config(project_root / "ana_speksi")
     for framework in frameworks:
         _generate_for_framework(project_root, framework, config)
 

@@ -1,4 +1,4 @@
-"""ana-speksi as-debt-analysis -- analyze technical debt."""
+"""ana_speksi as-debt-analysis -- analyze technical debt."""
 
 from __future__ import annotations
 
@@ -9,9 +9,9 @@ from typing import Optional
 import typer
 from rich.console import Console
 
-from ana-speksi.models import TECHNICAL_DEBT_DIR
-from ana-speksi.status import get_ana-speksi_root, ensure_dirs
-from ana-speksi.resources import read_template
+from ana_speksi.models import TECHNICAL_DEBT_DIR
+from ana_speksi.status import get_ana_speksi_root, ensure_dirs
+from ana_speksi.resources import read_template
 
 console = Console()
 
@@ -32,7 +32,7 @@ def debt_analysis_command(
 
     NO CODE CHANGES ARE ALLOWED during this analysis.
     """
-    root = get_ana-speksi_root()
+    root = get_ana_speksi_root()
     ensure_dirs(root)
 
     today = date.today().isoformat()
@@ -52,7 +52,7 @@ def debt_analysis_command(
 
     console.print(f"\n[bold]Technical Debt Analysis[/bold]")
     console.print(f"Target: [cyan]{target}[/cyan]")
-    console.print(f"Document: [cyan]ana-speksi/technical-debt/{debt_filename}[/cyan]")
+    console.print(f"Document: [cyan]ana_speksi/technical-debt/{debt_filename}[/cyan]")
     console.print(
         "\nThe AI agent should now execute the [bold cyan]as-debt-analysis[/bold cyan] skill"
     )
@@ -62,5 +62,5 @@ def debt_analysis_command(
     )
     console.print(
         "\nAfter analysis, you can run: "
-        f"uv run ana-speksi new --from-debt ana-speksi/technical-debt/{debt_filename}"
+        f"uv run ana_speksi new --from-debt ana_speksi/technical-debt/{debt_filename}"
     )

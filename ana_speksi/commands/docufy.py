@@ -1,4 +1,4 @@
-"""ana-speksi as-docufy -- archive and update truth."""
+"""ana_speksi as-docufy -- archive and update truth."""
 
 from __future__ import annotations
 
@@ -9,8 +9,8 @@ from pathlib import Path
 import typer
 from rich.console import Console
 
-from ana-speksi.models import ARCHIVE_DIR, ONGOING_DIR
-from ana-speksi.status import get_ana-speksi_root, list_ongoing_specs
+from ana_speksi.models import ARCHIVE_DIR, ONGOING_DIR
+from ana_speksi.status import get_ana_speksi_root, list_ongoing_specs
 
 console = Console()
 
@@ -22,7 +22,7 @@ def docufy_command(
     ),
 ) -> None:
     """Archive a completed spec and update ground truth."""
-    root = get_ana-speksi_root()
+    root = get_ana_speksi_root()
     specs = list_ongoing_specs(root)
 
     if not specs:
@@ -57,8 +57,8 @@ def docufy_command(
 
     shutil.move(str(source_dir), str(archive_dir))
     console.print(f"\nArchived [bold]{spec.name}[/bold] to:")
-    console.print(f"  ana-speksi/archive/{archive_name}/")
-    console.print("\nThe AI agent should now update ground truth (ana-speksi/truth/).")
+    console.print(f"  ana_speksi/archive/{archive_name}/")
+    console.print("\nThe AI agent should now update ground truth (ana_speksi/truth/).")
     console.print(
         "Invoke the [bold cyan]as-docufy[/bold cyan] skill for detailed instructions."
     )

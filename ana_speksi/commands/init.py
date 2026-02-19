@@ -1,4 +1,4 @@
-"""ana-speksi init -- initialize ana-speksi in a project."""
+"""ana_speksi init -- initialize ana_speksi in a project."""
 
 from __future__ import annotations
 
@@ -7,9 +7,9 @@ from pathlib import Path
 import typer
 from rich.console import Console
 
-from ana-speksi.models import AgentFramework, ana-speksi_DIR, SUBDIRS
-from ana-speksi.skill_generator import generate_skills
-from ana-speksi.status import ensure_dirs
+from ana_speksi.models import AgentFramework, ANA_SPEKSI_DIR, SUBDIRS
+from ana_speksi.skill_generator import generate_skills
+from ana_speksi.status import ensure_dirs
 
 console = Console()
 
@@ -28,12 +28,12 @@ def init_command(
         help="Project root directory.",
     ),
 ) -> None:
-    """Initialize ana-speksi in the current project."""
-    root = project_dir / ana-speksi_DIR
+    """Initialize ana_speksi in the current project."""
+    root = project_dir / ANA_SPEKSI_DIR
 
     # If no frameworks specified, ask interactively
     if not frameworks:
-        console.print("\n[bold]ana-speksi initialization[/bold]\n")
+        console.print("\n[bold]ana_speksi initialization[/bold]\n")
         console.print("Select the agent frameworks you want to generate skills for:\n")
         console.print("  1) Claude Code")
         console.print("  2) Cursor")
@@ -65,11 +65,11 @@ def init_command(
             raise typer.Exit(1)
 
     # Create directory structure
-    console.print(f"\nCreating ana-speksi directory structure at [cyan]{root}[/cyan]")
+    console.print(f"\nCreating ana_speksi directory structure at [cyan]{root}[/cyan]")
     ensure_dirs(root)
     console.print("  Created directories:")
     for sub in SUBDIRS:
-        console.print(f"    ana-speksi/{sub}/")
+        console.print(f"    ana_speksi/{sub}/")
 
     # Generate skills
     console.print("\nGenerating agent skills...")
@@ -80,7 +80,7 @@ def init_command(
     if not config_file.exists():
         config_file.write_text(
             """\
-# ana-speksi configuration
+# ana_speksi configuration
 # Adjust these settings to match your project.
 
 # When true, the AI agent skips all confirmation prompts during acceptance
@@ -105,10 +105,10 @@ rules:
 """,
             encoding="utf-8",
         )
-        console.print(f"  Created [cyan]ana-speksi/config.yml[/cyan]")
+        console.print(f"  Created [cyan]ana_speksi/config.yml[/cyan]")
 
-    console.print("\n[bold green]ana-speksi initialized successfully.[/bold green]")
+    console.print("\n[bold green]ana_speksi initialized successfully.[/bold green]")
     console.print("\nNext steps:")
-    console.print("  1. Edit ana-speksi/config.yml to add your project context")
-    console.print("  2. Run: uv run ana-speksi new")
+    console.print("  1. Edit ana_speksi/config.yml to add your project context")
+    console.print("  2. Run: uv run ana_speksi new")
     console.print("     Or use the /as-new slash command in your AI assistant")

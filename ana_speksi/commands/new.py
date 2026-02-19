@@ -1,4 +1,4 @@
-"""ana-speksi as-new -- start a new spec."""
+"""ana_speksi as-new -- start a new spec."""
 
 from __future__ import annotations
 
@@ -8,9 +8,9 @@ from pathlib import Path
 import typer
 from rich.console import Console
 
-from ana-speksi.models import ONGOING_DIR, make_spec_name, slugify
-from ana-speksi.status import get_ana-speksi_root, ensure_dirs
-from ana-speksi.resources import read_template
+from ana_speksi.models import ONGOING_DIR, make_spec_name, slugify
+from ana_speksi.status import get_ana_speksi_root, ensure_dirs
+from ana_speksi.resources import read_template
 
 console = Console()
 
@@ -37,7 +37,7 @@ def new_command(
     ),
 ) -> None:
     """Start a new spec-driven change."""
-    root = get_ana-speksi_root()
+    root = get_ana_speksi_root()
     ensure_dirs(root)
     ongoing = root / ONGOING_DIR
 
@@ -103,4 +103,4 @@ def new_command(
     console.print(f"  Location: {spec_dir}")
     console.print(f"  Phase: [cyan]proposal[/cyan]")
     console.print(f"\nNext: Review and fill in proposal.md, then run:")
-    console.print(f"  uv run ana-speksi continue {folder_name}")
+    console.print(f"  uv run ana_speksi continue {folder_name}")

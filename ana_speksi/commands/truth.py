@@ -1,4 +1,4 @@
-"""ana-speksi as-truth -- manage ground truth."""
+"""ana_speksi as-truth -- manage ground truth."""
 
 from __future__ import annotations
 
@@ -8,8 +8,8 @@ import typer
 from rich.console import Console
 from rich.tree import Tree
 
-from ana-speksi.models import TRUTH_DIR
-from ana-speksi.status import get_ana-speksi_root
+from ana_speksi.models import TRUTH_DIR
+from ana_speksi.status import get_ana_speksi_root
 
 console = Console()
 
@@ -23,7 +23,7 @@ truth_app = typer.Typer(
 @truth_app.command("show")
 def truth_show() -> None:
     """Display the current ground truth hierarchy."""
-    root = get_ana-speksi_root()
+    root = get_ana_speksi_root()
     truth_dir = root / TRUTH_DIR
 
     if not truth_dir.exists() or not any(truth_dir.iterdir()):
@@ -32,7 +32,7 @@ def truth_show() -> None:
         )
         return
 
-    tree = Tree(f"[bold]ana-speksi/truth/[/bold]")
+    tree = Tree(f"[bold]ana_speksi/truth/[/bold]")
     _build_tree(truth_dir, tree)
     console.print(tree)
 

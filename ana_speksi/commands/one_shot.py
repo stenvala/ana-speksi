@@ -1,4 +1,4 @@
-"""ana-speksi as-one-shot -- run all phases without stopping."""
+"""ana_speksi as-one-shot -- run all phases without stopping."""
 
 from __future__ import annotations
 

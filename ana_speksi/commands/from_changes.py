@@ -1,4 +1,4 @@
-"""ana-speksi as-from-changes -- create truth from existing changes."""
+"""ana_speksi as-from-changes -- create truth from existing changes."""
 
 from __future__ import annotations
 

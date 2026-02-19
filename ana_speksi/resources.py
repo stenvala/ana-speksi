@@ -1,4 +1,4 @@
-"""Resource file loading utilities for ana-speksi skills and templates."""
+"""Resource file loading utilities for ana_speksi skills and templates."""
 
 from __future__ import annotations
 
@@ -38,9 +38,7 @@ def list_skills() -> list[str]:
     if not SKILLS_DIR.exists():
         return []
     return sorted(
-        d.name
-        for d in SKILLS_DIR.iterdir()
-        if d.is_dir() and (d / "SKILL.md").exists()
+        d.name for d in SKILLS_DIR.iterdir() if d.is_dir() and (d / "SKILL.md").exists()
     )
 
 

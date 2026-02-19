@@ -1,1 +1,1 @@
-"""Commands package for ana-speksi CLI."""
+"""Commands package for ana_speksi CLI."""

@@ -1,4 +1,4 @@
-"""ana-speksi update -- regenerate skills and commands without touching ana-speksi/."""
+"""ana_speksi update -- regenerate skills and commands without touching ana_speksi/."""
 
 from __future__ import annotations
 
@@ -7,8 +7,8 @@ from pathlib import Path
 import typer
 from rich.console import Console
 
-from ana-speksi.models import AgentFramework, ana-speksi_DIR
-from ana-speksi.skill_generator import generate_skills
+from ana_speksi.models import AgentFramework, ANA_SPEKSI_DIR
+from ana_speksi.skill_generator import generate_skills
 
 console = Console()
 
@@ -27,17 +27,17 @@ def update_command(
         help="Project root directory.",
     ),
 ) -> None:
-    """Update agent skills and commands without touching the ana-speksi/ folder.
+    """Update agent skills and commands without touching the ana_speksi/ folder.
 
     Regenerates all skill files and command/prompt files for the selected
-    agent frameworks based on the latest ana-speksi skill definitions and
-    project config. The ana-speksi/ directory (config, ongoing, truth, archive)
+    agent frameworks based on the latest ana_speksi skill definitions and
+    project config. The ana_speksi/ directory (config, ongoing, truth, archive)
     is left untouched.
     """
-    config_path = project_dir / ana-speksi_DIR / "config.yml"
+    config_path = project_dir / ANA_SPEKSI_DIR / "config.yml"
     if not config_path.exists():
         console.print(
-            f"[red]ana-speksi is not initialized in this project. Run 'ana-speksi init' first. Config.yml not found at {config_path}.[/red]"
+            f"[red]ana_speksi is not initialized in this project. Run 'ana_speksi init' first. Config.yml not found at {config_path}.[/red]"
         )
         raise typer.Exit(1)
 
@@ -51,7 +51,7 @@ def update_command(
         else:
             console.print(
                 "[red]No agent framework directories found. "
-                "Specify frameworks with --framework or run 'ana-speksi init'.[/red]"
+                "Specify frameworks with --framework or run 'ana_speksi init'.[/red]"
             )
             raise typer.Exit(1)
 

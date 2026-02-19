@@ -1,4 +1,4 @@
-"""Core models and constants for ana-speksi."""
+"""Core models and constants for ana_speksi."""
 
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ from typing import Any
 # Directory layout
 # ---------------------------------------------------------------------------
 
-ana-speksi_DIR = "ana-speksi"
+ANA_SPEKSI_DIR = "ana-speksi"
 ONGOING_DIR = "ongoing"
 TRUTH_DIR = "truth"
 ARCHIVE_DIR = "archive"
