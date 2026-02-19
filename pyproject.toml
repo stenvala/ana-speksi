@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "ana-speksi"
-version = "0.1.0"
+version = "0.1.1"
 description = "Skill-driven spec development framework combining the best of spec-kit and OpenSpec"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -20,7 +20,7 @@ dependencies = [
 ]
 
 [project.scripts]
-ana_speksi = "ana_speksi.cli:app"
+ana-speksi = "ana_speksi.cli:app"
 
 [tool.hatch.build.targets.wheel]
 packages = ["ana_speksi"]

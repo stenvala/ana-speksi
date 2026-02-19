@@ -60,6 +60,12 @@ Archive a completed spec and update the ground truth.
    - `technical-spec.md` -- consolidated technical specification
    - Sub-folders for sub-features if applicable
 
+   **Extensions**: Check each story folder for `extension-*.md` files. These
+   document additional functionality discovered and implemented during codify
+   that was not in the original spec. Merge extension content into the truth
+   alongside the regular specs -- extensions describe real functionality that
+   was shipped and must be reflected in the ground truth.
+
    The truth is a living document that represents the current state of the
    system. Merge the new spec's content into the existing truth structure.
 

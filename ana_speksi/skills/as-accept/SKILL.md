@@ -25,8 +25,13 @@ auto-detects if there is a single ongoing spec.
    - Which spec and phase you are in
    - Which files need to be accepted
    - Which files are already accepted
+   - Whether `auto_confirm` is enabled (from `ana-speksi/config.yml`)
 
-2. **Ask for confirmation**
+2. **Confirmation or notification**
+
+   Check the `auto_confirm` field from step 1.
+
+   **If `auto_confirm` is `false` (default)**:
 
    Ask the user:
 
@@ -35,6 +40,16 @@ auto-detects if there is a single ongoing spec.
    > - [list files]
    >
    > Do you want to accept all of these?"
+
+   **If `auto_confirm` is `true`**:
+
+   Do NOT ask for confirmation. Instead, notify the user:
+
+   > "auto_confirm is enabled. Accepting the following files:
+   >
+   > - [list files]"
+
+   Then proceed directly to step 3.
 
 3. **Apply acceptance**
 
@@ -50,30 +65,24 @@ auto-detects if there is a single ongoing spec.
    - Update `**Status**: Draft` to `**Status**: Accepted` in each file
    - Update `[Draft]` to `[Accepted]` in index.md
 
-4. **Commit the acceptance (mandatory)**
+4. **Stage ana-speksi files and commit (mandatory)**
 
-   After acceptance, a commit is required. First check git status:
+   After acceptance, stage all files under the `ana-speksi/` directory and commit:
 
    ```
-   git status
+   git add ana-speksi/
    ```
 
-   If there are unstaged files, inform the user and help them stage:
+   Then commit with a descriptive message. Use `/commit` or create the commit
+   directly with a message like:
 
-   > "There are unstaged files. Please stage all files before committing:
-   >
-   > ```
-   > git add -A
-   > ```
-   >
-   > Or stage specific files with `git add <file>`"
+   > `ana-speksi: accept <phase> phase for <spec-name>`
 
-   Once all files are staged, ask the user to run:
+   **If `auto_confirm` is `true`**: do NOT ask the user whether to commit.
+   Just stage, commit, and notify them of the commit.
 
-   > "Please commit the acceptance using `/commit`
-   >
-   > Include in the commit message that this is an ana-speksi phase acceptance, e.g.:
-   > `ana-speksi: accept <phase> phase for <spec-name>`"
+   **If `auto_confirm` is `false`**: ask the user to confirm the commit
+   before running it.
 
 **Acceptance Gates**
 
@@ -93,5 +102,5 @@ and direct the user to run `as-accept` first.
 
 - Do NOT modify any content other than the Status field
 - Do NOT write any code
-- Always present files for user review before marking Accepted
+- Always present the list of files being accepted (even in auto_confirm mode)
 - No emojis in any output or files

@@ -47,6 +47,12 @@ index.md: proposal.md, functional-spec.md, technical-spec.md, tasks.md.
 Use `[Accepted]` for these (since they are auto-accepted). All other
 files are resources listed without status indicators. Do NOT use checkboxes.
 
+**Extensions**: If during codify you discover critical missing functionality
+that is not an iteration of existing tasks but entirely new, create an
+extension document using `/as-extend`. In one-shot mode, set
+`**Generated with**: one-shot` in the extension and immediately mark it
+as `[Implemented]` in index.md after implementing it.
+
 **Guardrails**
 - Code changes only during the codify phase
 - Each phase must complete fully before the next begins

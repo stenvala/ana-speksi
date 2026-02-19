@@ -76,12 +76,16 @@ def init_command(
     generate_skills(project_dir, frameworks)
 
     # Create config
-    config_file = root / "config.yaml"
+    config_file = root / "config.yml"
     if not config_file.exists():
         config_file.write_text(
             """\
 # ana-speksi configuration
 # Adjust these settings to match your project.
+
+# When true, the AI agent skips all confirmation prompts during acceptance
+# and other interactive steps -- it still notifies you of every action.
+auto_confirm: false
 
 # Project context injected into all skill instructions.
 # Helps the AI understand your project's conventions.
@@ -101,10 +105,10 @@ rules:
 """,
             encoding="utf-8",
         )
-        console.print(f"  Created [cyan]ana-speksi/config.yaml[/cyan]")
+        console.print(f"  Created [cyan]ana-speksi/config.yml[/cyan]")
 
     console.print("\n[bold green]ana-speksi initialized successfully.[/bold green]")
     console.print("\nNext steps:")
-    console.print("  1. Edit ana-speksi/config.yaml to add your project context")
+    console.print("  1. Edit ana-speksi/config.yml to add your project context")
     console.print("  2. Run: uv run ana_speksi new")
     console.print("     Or use the /as-new slash command in your AI assistant")

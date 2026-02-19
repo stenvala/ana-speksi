@@ -8,15 +8,20 @@ from typing import Any
 from ana_speksi.status import get_ana_speksi_root
 
 
+# ---------------------------------------------------------------------------
+# Project config (ana-speksi/config.yml)
+# ---------------------------------------------------------------------------
+
+
 def load_config(root: Path | None = None) -> dict[str, Any]:
-    """Load ana-speksi/config.yaml and return its contents.
+    """Load ana-speksi/config.yml and return its contents.
 
     Returns an empty dict if the file does not exist or cannot be parsed.
     """
     if root is None:
         root = get_ana_speksi_root()
 
-    config_path = root / "config.yaml"
+    config_path = root / "config.yml"
     if not config_path.exists():
         return {}
 
@@ -26,6 +31,12 @@ def load_config(root: Path | None = None) -> dict[str, Any]:
         return yaml.safe_load(config_path.read_text(encoding="utf-8")) or {}
     except Exception:
         return {}
+
+
+def get_auto_confirm(root: Path | None = None) -> bool:
+    """Return the auto_confirm setting from ana-speksi/config.yml."""
+    cfg = load_config(root)
+    return bool(cfg.get("auto_confirm", False))
 
 
 def get_context(config: dict[str, Any]) -> str | None:

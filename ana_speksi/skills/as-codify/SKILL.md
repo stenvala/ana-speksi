@@ -45,6 +45,9 @@ THIS IS THE ONLY PHASE WHERE CODE CHANGES ARE ALLOWED.
    - research.md for technical decisions
    - data-model.md for data model changes (if exists)
    - implementation-order.md for the story implementation sequence
+   - Any `extension-*.md` files in the current story's folder (these
+     document additional functionality discovered during implementation
+     that must also be implemented)
 
 3. **Select the next story (MUST follow implementation-order.md)**
 
@@ -85,9 +88,15 @@ THIS IS THE ONLY PHASE WHERE CODE CHANGES ARE ALLOWED.
    d. **Phase 4: Manual Verification** contains suggestions only (no
       checkboxes). Do NOT execute these -- they are for the user to
       perform at their discretion. Skip this phase during codify.
-   e. After completing ALL checkbox tasks for the story, verify all
-      acceptance scenarios from functional-spec.md are satisfied
-   f. **Update index.md** to mark the story as complete: set the
+   e. After completing ALL checkbox tasks for the story, implement any
+      `extension-*.md` requirements for the story. For each extension:
+      - Read the extension document
+      - Implement the requirements and acceptance scenarios
+      - Update index.md: add `[Implemented]` before the extension link
+        (e.g., `- [Implemented] [extension-foo.md](...)`)
+   f. Verify all acceptance scenarios from functional-spec.md AND all
+      extension documents are satisfied
+   g. **Update index.md** to mark the story as complete: set the
       story's `**Implementation**` line to `Complete`
 
 4. **STOP after the story is complete**

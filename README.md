@@ -169,8 +169,18 @@ ana-speksi/
   truth/          # Ground truth -- hierarchical feature documentation
   archive/        # Completed specs (prefixed with date)
   technical-debt/ # Technical debt analyses
-  config.yaml     # Project configuration
+  config.yml     # Project configuration
 ```
+
+### config.yml
+
+All project-wide settings live in `ana-speksi/config.yml`:
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `auto_confirm` | `false` | When `true`, the AI agent skips confirmation prompts during acceptance and commits. It still notifies you of every action. |
+| `context` | (empty) | Project context injected into all skill instructions (tech stack, conventions, constraints). |
+| `rules` | (empty) | Per-phase rules that are injected into the corresponding skill instructions. |
 
 ## Spec Structure (under ongoing/)
 

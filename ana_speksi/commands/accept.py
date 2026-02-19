@@ -9,6 +9,7 @@ import toons
 import typer
 from rich.console import Console
 
+from ana_speksi.config import get_auto_confirm
 from ana_speksi.models import DocStatus, Phase, PHASE_DESCRIPTIONS, SpecStatus
 from ana_speksi.status import (
     get_ana_speksi_root,
@@ -70,11 +71,14 @@ def get_acceptance_status(spec: SpecStatus) -> dict:
     This is a pure data function with no side effects -- used by other commands
     to check the acceptance gate before proceeding.
     """
+    auto_confirm = get_auto_confirm()
+
     target = _ACCEPTANCE_TARGETS.get(spec.phase)
     if not target:
         return {
             "spec": spec.name,
             "phase": spec.phase.value,
+            "auto_confirm": auto_confirm,
             "acceptance_target": None,
             "description": f"No acceptance action for phase: {spec.phase.value}",
             "files_to_accept": [],
@@ -118,6 +122,7 @@ def get_acceptance_status(spec: SpecStatus) -> dict:
     return {
         "spec": spec.name,
         "phase": spec.phase.value,
+        "auto_confirm": auto_confirm,
         "acceptance_target": target["label"],
         "description": target["description"],
         "files_to_accept": files_to_accept,

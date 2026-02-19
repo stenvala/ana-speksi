@@ -1,0 +1,18 @@
+# ana-speksi configuration
+# Adjust these settings to match your project.
+
+# Project context injected into all skill instructions.
+# Helps the AI understand your project's conventions.
+context: |
+  # Add your project context here.
+  # Tech stack, conventions, constraints, etc.
+
+# Per-phase rules (optional)
+rules:
+  proposal:
+    - Keep proposals focused and concise
+  storify:
+    - Use WHEN/THEN format for acceptance scenarios
+  taskify:
+    - Each task should reference a skill
+    - Include exact file paths

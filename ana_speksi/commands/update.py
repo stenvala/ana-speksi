@@ -34,10 +34,10 @@ def update_command(
     project config. The ana-speksi/ directory (config, ongoing, truth, archive)
     is left untouched.
     """
-    config_path = project_dir / ANA_SPEKSI_DIR / "config.yaml"
+    config_path = project_dir / ANA_SPEKSI_DIR / "config.yml"
     if not config_path.exists():
         console.print(
-            "[red]ana-speksi is not initialized in this project. Run 'ana_speksi init' first.[/red]"
+            f"[red]ana-speksi is not initialized in this project. Run 'ana_speksi init' first. Config.yml not found at {config_path}.[/red]"
         )
         raise typer.Exit(1)
 
