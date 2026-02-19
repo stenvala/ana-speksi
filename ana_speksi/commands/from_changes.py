@@ -1,4 +1,4 @@
-"""ana_speksi as-from-changes -- create truth from existing changes."""
+"""ana-speksi as-from-changes -- create truth from existing changes."""
 
 from __future__ import annotations
 
@@ -12,11 +12,17 @@ console = Console()
 
 def from_changes_command(
     staged: bool = typer.Option(False, "--staged", help="From git staged changes."),
-    commit: Optional[str] = typer.Option(None, "--commit", help="From a specific commit hash."),
+    commit: Optional[str] = typer.Option(
+        None, "--commit", help="From a specific commit hash."
+    ),
     pr: Optional[str] = typer.Option(None, "--pr", help="From a pull request number."),
     diff: bool = typer.Option(False, "--diff", help="From current git diff."),
-    folder: Optional[str] = typer.Option(None, "--folder", help="From a specific folder."),
-    codebase: bool = typer.Option(False, "--codebase", help="From the entire codebase."),
+    folder: Optional[str] = typer.Option(
+        None, "--folder", help="From a specific folder."
+    ),
+    codebase: bool = typer.Option(
+        False, "--codebase", help="From the entire codebase."
+    ),
 ) -> None:
     """Create or update ground truth from existing changes.
 

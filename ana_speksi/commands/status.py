@@ -1,4 +1,4 @@
-"""ana_speksi status -- show current status of all specs."""
+"""ana-speksi status -- show current status of all specs."""
 
 from __future__ import annotations
 
@@ -7,7 +7,7 @@ import toons
 import typer
 from rich.console import Console
 
-from ana_speksi.status import get_ana_speksi_root, print_status, print_status_json
+from ana-speksi.status import get_ana-speksi_root, print_status, print_status_json
 
 console = Console()
 
@@ -26,7 +26,7 @@ def status_command(
     ),
 ) -> None:
     """Show the current status of all ongoing specs."""
-    root = get_ana_speksi_root()
+    root = get_ana-speksi_root()
 
     if as_toon:
         data = print_status_json(root)

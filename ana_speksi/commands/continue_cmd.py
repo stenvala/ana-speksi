@@ -1,4 +1,4 @@
-"""ana_speksi as-continue -- advance a spec to the next phase."""
+"""ana-speksi as-continue -- advance a spec to the next phase."""
 
 from __future__ import annotations
 
@@ -7,10 +7,10 @@ import toons
 import typer
 from rich.console import Console
 
-from ana_speksi.models import Phase, PHASE_DESCRIPTIONS, SpecStatus
-from ana_speksi.commands.accept import get_acceptance_status
-from ana_speksi.status import (
-    get_ana_speksi_root,
+from ana-speksi.models import Phase, PHASE_DESCRIPTIONS, SpecStatus
+from ana-speksi.commands.accept import get_acceptance_status
+from ana-speksi.status import (
+    get_ana-speksi_root,
     list_ongoing_specs,
     get_spec_status,
     print_status,
@@ -32,7 +32,7 @@ def continue_command(
     ),
 ) -> None:
     """Continue working on a spec by advancing to the next phase."""
-    root = get_ana_speksi_root()
+    root = get_ana-speksi_root()
     specs = list_ongoing_specs(root)
 
     if not specs:

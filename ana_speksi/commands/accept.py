@@ -1,4 +1,4 @@
-"""ana_speksi as-accept -- mark phase outputs as Accepted."""
+"""ana-speksi as-accept -- mark phase outputs as Accepted."""
 
 from __future__ import annotations
 
@@ -9,10 +9,10 @@ import toons
 import typer
 from rich.console import Console
 
-from ana_speksi.config import get_auto_confirm
-from ana_speksi.models import DocStatus, Phase, PHASE_DESCRIPTIONS, SpecStatus
-from ana_speksi.status import (
-    get_ana_speksi_root,
+from ana-speksi.config import get_auto_confirm
+from ana-speksi.models import DocStatus, Phase, PHASE_DESCRIPTIONS, SpecStatus
+from ana-speksi.status import (
+    get_ana-speksi_root,
     get_spec_status,
     list_ongoing_specs,
     print_status_json,
@@ -175,7 +175,7 @@ def accept_command(
     ),
 ) -> None:
     """Mark the current phase's outputs as Accepted."""
-    root = get_ana_speksi_root()
+    root = get_ana-speksi_root()
     specs = list_ongoing_specs(root)
 
     if not specs:

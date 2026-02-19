@@ -29,13 +29,15 @@ Start a new ana-speksi change by creating a proposal.
 3. **Run the CLI to scaffold the spec**
 
    If the user has a description:
+
    ```
-   uv run ana_speksi new "<ticket-id>" "<description>" --name "<short-name>"
+   uv run ana-speksi new "<ticket-id>" "<description>" --name "<short-name>"
    ```
 
    If no description is provided:
+
    ```
-   uv run ana_speksi new "<ticket-id>" --name "<short-name>"
+   uv run ana-speksi new "<ticket-id>" --name "<short-name>"
    ```
 
    The CLI will:

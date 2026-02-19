@@ -17,7 +17,7 @@ was auto-generated, you can use either the short name or the full name
    If no name is provided, run:
 
    ```
-   uv run ana_speksi status --toon
+   uv run ana-speksi status --toon
    ```
 
    Show available specs and ask the user to choose.
@@ -27,7 +27,7 @@ was auto-generated, you can use either the short name or the full name
    Run:
 
    ```
-   uv run ana_speksi status --toon
+   uv run ana-speksi status --toon
    ```
 
    Parse the output to determine the current phase of the selected spec.
@@ -37,7 +37,7 @@ was auto-generated, you can use either the short name or the full name
    Run:
 
    ```
-   uv run ana_speksi accept --toon
+   uv run ana-speksi accept --toon
    ```
 
    If `files_to_accept` is NOT empty, stop and inform the user:
@@ -100,7 +100,7 @@ was auto-generated, you can use either the short name or the full name
 
 **Guardrails**
 
-- Always run `uv run ana_speksi status` first to know where you are
+- Always run `uv run ana-speksi status` first to know where you are
 - Follow the phase-specific skill instructions exactly
 - Do NOT skip phases
 - Do NOT bypass acceptance gates

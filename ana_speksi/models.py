@@ -13,7 +13,7 @@ from typing import Any
 # Directory layout
 # ---------------------------------------------------------------------------
 
-ANA_SPEKSI_DIR = "ana-speksi"
+ana-speksi_DIR = "ana-speksi"
 ONGOING_DIR = "ongoing"
 TRUTH_DIR = "truth"
 ARCHIVE_DIR = "archive"

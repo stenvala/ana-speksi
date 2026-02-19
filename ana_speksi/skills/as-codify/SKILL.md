@@ -17,7 +17,7 @@ THIS IS THE ONLY PHASE WHERE CODE CHANGES ARE ALLOWED.
    Run:
 
    ```
-   uv run ana_speksi accept --toon
+   uv run ana-speksi accept --toon
    ```
 
    If `files_to_accept` is NOT empty, stop and inform the user:
@@ -33,7 +33,7 @@ THIS IS THE ONLY PHASE WHERE CODE CHANGES ARE ALLOWED.
    Then run:
 
    ```
-   uv run ana_speksi status --toon
+   uv run ana-speksi status --toon
    ```
 
    Identify the spec. List all stories and their tasks.
@@ -68,36 +68,36 @@ THIS IS THE ONLY PHASE WHERE CODE CHANGES ARE ALLOWED.
 
    a. Read the story's functional-spec.md, technical-spec.md, and tasks.md
    b. Execute tasks in phase order (Phase 1, then Phase 2, etc.).
-      Within each phase, execute tasks in order (P01.T001, P01.T002, ...).
-      Tasks marked `[P]` may be executed in parallel within the same phase.
+   Within each phase, execute tasks in order (P01.T001, P01.T002, ...).
+   Tasks marked `[P]` may be executed in parallel within the same phase.
    c. For each checkbox task, follow this EXACT sequence:
 
-      i.  **Invoke every skill** listed in the task's
-          `**Mandatory to use skills: /...**` annotation. Use the Skill tool
-          (i.e., `/skill-name`) for EACH referenced skill BEFORE writing
-          any code. This loads the skill's patterns, rules, file location
-          conventions, and templates into context.
-          THIS IS A BLOCKING REQUIREMENT. Do NOT implement any task
-          without first invoking its listed skills.
-      ii. Implement the task following the loaded skill instructions.
-      iii. Mark the task as complete in tasks.md: `- [x]`
-      iv. **Update index.md** immediately to reflect current progress:
-          update the task count (e.g., "3/10 tasks complete") and set
-          the story's `**Implementation**` line to `In Progress`
+   i. **Invoke every skill** listed in the task's
+   `**Mandatory to use skills: /...**` annotation. Use the Skill tool
+   (i.e., `/skill-name`) for EACH referenced skill BEFORE writing
+   any code. This loads the skill's patterns, rules, file location
+   conventions, and templates into context.
+   THIS IS A BLOCKING REQUIREMENT. Do NOT implement any task
+   without first invoking its listed skills.
+   ii. Implement the task following the loaded skill instructions.
+   iii. Mark the task as complete in tasks.md: `- [x]`
+   iv. **Update index.md** immediately to reflect current progress:
+   update the task count (e.g., "3/10 tasks complete") and set
+   the story's `**Implementation**` line to `In Progress`
 
    d. **Phase 4: Manual Verification** contains suggestions only (no
-      checkboxes). Do NOT execute these -- they are for the user to
-      perform at their discretion. Skip this phase during codify.
+   checkboxes). Do NOT execute these -- they are for the user to
+   perform at their discretion. Skip this phase during codify.
    e. After completing ALL checkbox tasks for the story, implement any
-      `extension-*.md` requirements for the story. For each extension:
-      - Read the extension document
-      - Implement the requirements and acceptance scenarios
-      - Update index.md: add `[Implemented]` before the extension link
-        (e.g., `- [Implemented] [extension-foo.md](...)`)
-   f. Verify all acceptance scenarios from functional-spec.md AND all
-      extension documents are satisfied
-   g. **Update index.md** to mark the story as complete: set the
-      story's `**Implementation**` line to `Complete`
+   `extension-*.md` requirements for the story. For each extension:
+   - Read the extension document
+   - Implement the requirements and acceptance scenarios
+   - Update index.md: add `[Implemented]` before the extension link
+     (e.g., `- [Implemented] [extension-foo.md](...)`)
+     f. Verify all acceptance scenarios from functional-spec.md AND all
+     extension documents are satisfied
+     g. **Update index.md** to mark the story as complete: set the
+     story's `**Implementation**` line to `Complete`
 
 4. **STOP after the story is complete**
 

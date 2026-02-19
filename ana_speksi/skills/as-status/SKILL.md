@@ -31,10 +31,10 @@ auto-detects if there is a single ongoing spec.
    Run:
 
    ```
-   uv run ana_speksi accept --toon
+   uv run ana-speksi accept --toon
    ```
 
-   (or with a spec name: `uv run ana_speksi accept <name> --toon`)
+   (or with a spec name: `uv run ana-speksi accept <name> --toon`)
 
    The `--toon` flag is a dry-run that does NOT modify any files. It returns:
    - Which spec and phase you are in
@@ -46,7 +46,7 @@ auto-detects if there is a single ongoing spec.
    Run:
 
    ```
-   uv run ana_speksi status --toon
+   uv run ana-speksi status --toon
    ```
 
    (or with `--name <spec-name>` for a specific spec)

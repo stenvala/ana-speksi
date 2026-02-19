@@ -15,7 +15,7 @@ Archive a completed spec and update the ground truth.
    Run:
 
    ```
-   uv run ana_speksi status --toon
+   uv run ana-speksi status --toon
    ```
 
    Check that ALL tasks across ALL stories are marked as complete (`[x]`).

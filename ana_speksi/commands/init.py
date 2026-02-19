@@ -1,4 +1,4 @@
-"""ana_speksi init -- initialize ana-speksi in a project."""
+"""ana-speksi init -- initialize ana-speksi in a project."""
 
 from __future__ import annotations
 
@@ -7,9 +7,9 @@ from pathlib import Path
 import typer
 from rich.console import Console
 
-from ana_speksi.models import AgentFramework, ANA_SPEKSI_DIR, SUBDIRS
-from ana_speksi.skill_generator import generate_skills
-from ana_speksi.status import ensure_dirs
+from ana-speksi.models import AgentFramework, ana-speksi_DIR, SUBDIRS
+from ana-speksi.skill_generator import generate_skills
+from ana-speksi.status import ensure_dirs
 
 console = Console()
 
@@ -29,7 +29,7 @@ def init_command(
     ),
 ) -> None:
     """Initialize ana-speksi in the current project."""
-    root = project_dir / ANA_SPEKSI_DIR
+    root = project_dir / ana-speksi_DIR
 
     # If no frameworks specified, ask interactively
     if not frameworks:
@@ -110,5 +110,5 @@ rules:
     console.print("\n[bold green]ana-speksi initialized successfully.[/bold green]")
     console.print("\nNext steps:")
     console.print("  1. Edit ana-speksi/config.yml to add your project context")
-    console.print("  2. Run: uv run ana_speksi new")
+    console.print("  2. Run: uv run ana-speksi new")
     console.print("     Or use the /as-new slash command in your AI assistant")

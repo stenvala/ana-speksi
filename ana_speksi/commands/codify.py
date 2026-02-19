@@ -1,11 +1,11 @@
-"""ana_speksi as-codify -- implementation phase (delegates to AI via skill)."""
+"""ana-speksi as-codify -- implementation phase (delegates to AI via skill)."""
 
 from __future__ import annotations
 
 import typer
 from rich.console import Console
 
-from ana_speksi.commands.continue_cmd import continue_command
+from ana-speksi.commands.continue_cmd import continue_command
 
 console = Console()
 

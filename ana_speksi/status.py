@@ -8,9 +8,9 @@ from pathlib import Path
 from rich.console import Console
 from rich.table import Table
 
-from ana_speksi.models import (
+from ana-speksi.models import (
     ARCHIVE_DIR,
-    ANA_SPEKSI_DIR,
+    ana-speksi_DIR,
     ONGOING_DIR,
     TECHNICAL_DEBT_DIR,
     TRUTH_DIR,
@@ -23,21 +23,21 @@ from ana_speksi.models import (
 console = Console()
 
 
-def get_ana_speksi_root(cwd: Path | None = None) -> Path:
+def get_ana-speksi_root(cwd: Path | None = None) -> Path:
     """Return the ana-speksi root directory, searching upward from cwd."""
     start = cwd or Path.cwd()
     current = start
     while current != current.parent:
-        candidate = current / ANA_SPEKSI_DIR
+        candidate = current / ana-speksi_DIR
         if candidate.is_dir():
             return candidate
         current = current.parent
-    return start / ANA_SPEKSI_DIR
+    return start / ana-speksi_DIR
 
 
 def ensure_dirs(root: Path) -> None:
     """Ensure all required subdirectories exist."""
-    from ana_speksi.models import TRUTH_DATA_MODELS_DIR, TRUTH_ENUMS_DIR
+    from ana-speksi.models import TRUTH_DATA_MODELS_DIR, TRUTH_ENUMS_DIR
 
     dirs: list[Path] = []
     for sub in [ONGOING_DIR, TRUTH_DIR, ARCHIVE_DIR, TECHNICAL_DEBT_DIR]:

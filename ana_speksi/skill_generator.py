@@ -7,9 +7,9 @@ from pathlib import Path
 
 from rich.console import Console
 
-from ana_speksi.config import inject_config_into_skill, load_config
-from ana_speksi.models import AgentFramework, AGENT_SKILL_PATHS, AGENT_COMMAND_PATHS
-from ana_speksi.resources import (
+from ana-speksi.config import inject_config_into_skill, load_config
+from ana-speksi.models import AgentFramework, AGENT_SKILL_PATHS, AGENT_COMMAND_PATHS
+from ana-speksi.resources import (
     SKILLS_DIR,
     list_skills,
     parse_skill_frontmatter,

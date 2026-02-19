@@ -15,7 +15,7 @@ Conduct technical research and create technical specifications for each story.
    Run:
 
    ```
-   uv run ana_speksi accept --toon
+   uv run ana-speksi accept --toon
    ```
 
    If `files_to_accept` is NOT empty, stop and inform the user:

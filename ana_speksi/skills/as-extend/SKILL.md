@@ -17,7 +17,7 @@ not iterations or refinements, but new requirements discovered while coding.
    Run:
 
    ```
-   uv run ana_speksi status --toon
+   uv run ana-speksi status --toon
    ```
 
    If there is a single ongoing spec, use it. Otherwise, ask the user to choose.

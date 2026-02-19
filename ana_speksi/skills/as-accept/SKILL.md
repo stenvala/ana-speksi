@@ -16,10 +16,10 @@ auto-detects if there is a single ongoing spec.
    Run:
 
    ```
-   uv run ana_speksi accept --toon
+   uv run ana-speksi accept --toon
    ```
 
-   (or with a spec name: `uv run ana_speksi accept <name> --toon`)
+   (or with a spec name: `uv run ana-speksi accept <name> --toon`)
 
    The output tells you:
    - Which spec and phase you are in
@@ -56,10 +56,10 @@ auto-detects if there is a single ongoing spec.
    Run:
 
    ```
-   uv run ana_speksi accept
+   uv run ana-speksi accept
    ```
 
-   (or with a spec name: `uv run ana_speksi accept <name>`)
+   (or with a spec name: `uv run ana-speksi accept <name>`)
 
    The command will:
    - Update `**Status**: Draft` to `**Status**: Accepted` in each file

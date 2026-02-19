@@ -5,7 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
-from ana_speksi.status import get_ana_speksi_root
+from ana-speksi.status import get_ana-speksi_root
 
 
 # ---------------------------------------------------------------------------
@@ -19,7 +19,7 @@ def load_config(root: Path | None = None) -> dict[str, Any]:
     Returns an empty dict if the file does not exist or cannot be parsed.
     """
     if root is None:
-        root = get_ana_speksi_root()
+        root = get_ana-speksi_root()
 
     config_path = root / "config.yml"
     if not config_path.exists():

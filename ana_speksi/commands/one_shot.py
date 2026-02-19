@@ -1,4 +1,4 @@
-"""ana_speksi as-one-shot -- run all phases without stopping."""
+"""ana-speksi as-one-shot -- run all phases without stopping."""
 
 from __future__ import annotations
 
@@ -24,5 +24,9 @@ def one_shot_command(
     console.print(
         "\nThe AI agent should now execute the [bold cyan]as-one-shot[/bold cyan] skill,"
     )
-    console.print("which runs all phases from proposal through archive without stopping.")
-    console.print("\nPhases: proposal -> storify -> research+techify -> taskify -> codify -> docufy")
+    console.print(
+        "which runs all phases from proposal through archive without stopping."
+    )
+    console.print(
+        "\nPhases: proposal -> storify -> research+techify -> taskify -> codify -> docufy"
+    )

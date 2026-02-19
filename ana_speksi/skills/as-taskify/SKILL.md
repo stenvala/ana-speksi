@@ -15,7 +15,7 @@ Create implementation tasks for each user story.
    Run:
 
    ```
-   uv run ana_speksi accept --toon
+   uv run ana-speksi accept --toon
    ```
 
    If `files_to_accept` is NOT empty, stop and inform the user:
@@ -73,7 +73,6 @@ Create implementation tasks for each user story.
    - `**Generated with**: as-taskify` in the header
 
    Each tasks.md is organized into phases with sub-sections:
-
    - **Phase 1: Setup** -- scaffolding, configuration, migrations
    - **Phase 2: Implementation** -- split into sub-sections as applicable:
      Database Changes, Service Changes, API Changes, UI Changes.

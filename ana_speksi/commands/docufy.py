@@ -1,4 +1,4 @@
-"""ana_speksi as-docufy -- archive and update truth."""
+"""ana-speksi as-docufy -- archive and update truth."""
 
 from __future__ import annotations
 
@@ -9,8 +9,8 @@ from pathlib import Path
 import typer
 from rich.console import Console
 
-from ana_speksi.models import ARCHIVE_DIR, ONGOING_DIR
-from ana_speksi.status import get_ana_speksi_root, list_ongoing_specs
+from ana-speksi.models import ARCHIVE_DIR, ONGOING_DIR
+from ana-speksi.status import get_ana-speksi_root, list_ongoing_specs
 
 console = Console()
 
@@ -22,7 +22,7 @@ def docufy_command(
     ),
 ) -> None:
     """Archive a completed spec and update ground truth."""
-    root = get_ana_speksi_root()
+    root = get_ana-speksi_root()
     specs = list_ongoing_specs(root)
 
     if not specs:

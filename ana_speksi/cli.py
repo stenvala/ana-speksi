@@ -2,18 +2,18 @@
 
 import typer
 
-from ana_speksi.commands.accept import accept_command
-from ana_speksi.commands.init import init_command
-from ana_speksi.commands.new import new_command
-from ana_speksi.commands.continue_cmd import continue_command
-from ana_speksi.commands.codify import codify_command
-from ana_speksi.commands.docufy import docufy_command
-from ana_speksi.commands.one_shot import one_shot_command
-from ana_speksi.commands.status import status_command
-from ana_speksi.commands.from_changes import from_changes_command
-from ana_speksi.commands.debt_analysis import debt_analysis_command
-from ana_speksi.commands.update import update_command
-from ana_speksi.commands.truth import truth_app
+from ana-speksi.commands.accept import accept_command
+from ana-speksi.commands.init import init_command
+from ana-speksi.commands.new import new_command
+from ana-speksi.commands.continue_cmd import continue_command
+from ana-speksi.commands.codify import codify_command
+from ana-speksi.commands.docufy import docufy_command
+from ana-speksi.commands.one_shot import one_shot_command
+from ana-speksi.commands.status import status_command
+from ana-speksi.commands.from_changes import from_changes_command
+from ana-speksi.commands.debt_analysis import debt_analysis_command
+from ana-speksi.commands.update import update_command
+from ana-speksi.commands.truth import truth_app
 
 app = typer.Typer(
     name="ana-speksi",

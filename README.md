@@ -45,10 +45,10 @@ uv sync
 
 ```bash
 # 1. Initialize ana-speksi in your project (generates skills + commands for your editor)
-uv run ana_speksi init
+uv run ana-speksi init
 
 # 2. After updating ana-speksi, regenerate skills without touching ana-speksi/ folder
-uv run ana_speksi update
+uv run ana-speksi update
 ```
 
 After init, your agent editor (Claude Code, GitHub Copilot, Cursor) has all the commands and skills available. Use them directly in the editor or CLI.
@@ -77,8 +77,9 @@ All commands are used as slash commands in your AI coding assistant:
 ```
 
 Check status anytime with:
+
 ```bash
-uv run ana_speksi status
+uv run ana-speksi status
 ```
 
 ## Workflow
@@ -176,11 +177,11 @@ ana-speksi/
 
 All project-wide settings live in `ana-speksi/config.yml`:
 
-| Setting | Default | Description |
-|---------|---------|-------------|
+| Setting        | Default | Description                                                                                                                |
+| -------------- | ------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `auto_confirm` | `false` | When `true`, the AI agent skips confirmation prompts during acceptance and commits. It still notifies you of every action. |
-| `context` | (empty) | Project context injected into all skill instructions (tech stack, conventions, constraints). |
-| `rules` | (empty) | Per-phase rules that are injected into the corresponding skill instructions. |
+| `context`      | (empty) | Project context injected into all skill instructions (tech stack, conventions, constraints).                               |
+| `rules`        | (empty) | Per-phase rules that are injected into the corresponding skill instructions.                                               |
 
 ## Spec Structure (under ongoing/)
 
@@ -207,48 +208,48 @@ TICKET-123.feature-name/               # Folder name includes ticket ID
 
 These commands are available as slash commands in your AI coding assistant:
 
-| Command | Description |
-|---------|-------------|
-| `/as-new` | Start a new spec-driven change |
-| `/as-accept <name>` | Review and accept current phase outputs |
-| `/as-continue <name>` | Advance to the next phase (auto-detects which) |
-| `/as-storify <name>` | Create functional specs (equivalent to as-continue at storify) |
-| `/as-techify <name>` | Research + create technical specs |
-| `/as-taskify <name>` | Create implementation tasks |
-| `/as-codify <name>` | Start/continue implementation (only code-change phase) |
-| `/as-docufy <name>` | Archive and update ground truth |
-| `/as-one-shot <desc>` | Run all phases without stopping (auto-accepts all) |
-| `/as-status [name]` | Show status and acceptance readiness |
-| `/as-from-changes` | Create truth from existing changes/codebase |
-| `/as-debt-analysis <target>` | Analyze technical debt (no code changes) |
-| `/as-truth-rearrange` | Rearrange ground truth hierarchy |
+| Command                      | Description                                                    |
+| ---------------------------- | -------------------------------------------------------------- |
+| `/as-new`                    | Start a new spec-driven change                                 |
+| `/as-accept <name>`          | Review and accept current phase outputs                        |
+| `/as-continue <name>`        | Advance to the next phase (auto-detects which)                 |
+| `/as-storify <name>`         | Create functional specs (equivalent to as-continue at storify) |
+| `/as-techify <name>`         | Research + create technical specs                              |
+| `/as-taskify <name>`         | Create implementation tasks                                    |
+| `/as-codify <name>`          | Start/continue implementation (only code-change phase)         |
+| `/as-docufy <name>`          | Archive and update ground truth                                |
+| `/as-one-shot <desc>`        | Run all phases without stopping (auto-accepts all)             |
+| `/as-status [name]`          | Show status and acceptance readiness                           |
+| `/as-from-changes`           | Create truth from existing changes/codebase                    |
+| `/as-debt-analysis <target>` | Analyze technical debt (no code changes)                       |
+| `/as-truth-rearrange`        | Rearrange ground truth hierarchy                               |
 
 ## CLI Commands
 
 These are run directly in the terminal for setup and status:
 
-| Command | Description |
-|---------|-------------|
-| `uv run ana_speksi init` | Initialize ana-speksi (creates dirs, generates agent skills) |
-| `uv run ana_speksi update` | Regenerate skills and commands (does not touch ana-speksi/) |
-| `uv run ana_speksi status` | Show status of all ongoing specs |
-| `uv run ana_speksi accept [name]` | Show acceptance status for a spec |
-| `uv run ana_speksi truth show` | Display the ground truth hierarchy |
-| `uv run ana_speksi truth rearrange <desc>` | Reorganize ground truth |
+| Command                                    | Description                                                  |
+| ------------------------------------------ | ------------------------------------------------------------ |
+| `uv run ana-speksi init`                   | Initialize ana-speksi (creates dirs, generates agent skills) |
+| `uv run ana-speksi update`                 | Regenerate skills and commands (does not touch ana-speksi/)  |
+| `uv run ana-speksi status`                 | Show status of all ongoing specs                             |
+| `uv run ana-speksi accept [name]`          | Show acceptance status for a spec                            |
+| `uv run ana-speksi truth show`             | Display the ground truth hierarchy                           |
+| `uv run ana-speksi truth rearrange <desc>` | Reorganize ground truth                                      |
 
 ## Phase Skills
 
 Each phase has a corresponding agent skill that provides detailed instructions:
 
-| Phase | Skill | What It Does |
-|-------|-------|-------------|
-| Proposal | as-new | Creates proposal.md with problem, stories, requirements |
-| Accept | as-accept | Reviews and marks phase outputs as Accepted |
-| Storify | as-storify | Creates functional specs with WHEN/THEN scenarios |
-| Research + Techify | as-techify | Research + technical specs per story |
-| Taskify | as-taskify | Creates task lists referencing skills |
-| Codify | as-codify | Implements tasks (ONLY code change phase) |
-| Docufy | as-docufy | Archives spec, updates ground truth |
+| Phase              | Skill      | What It Does                                            |
+| ------------------ | ---------- | ------------------------------------------------------- |
+| Proposal           | as-new     | Creates proposal.md with problem, stories, requirements |
+| Accept             | as-accept  | Reviews and marks phase outputs as Accepted             |
+| Storify            | as-storify | Creates functional specs with WHEN/THEN scenarios       |
+| Research + Techify | as-techify | Research + technical specs per story                    |
+| Taskify            | as-taskify | Creates task lists referencing skills                   |
+| Codify             | as-codify  | Implements tasks (ONLY code change phase)               |
+| Docufy             | as-docufy  | Archives spec, updates ground truth                     |
 
 ## Ad Hoc Workflows
 
@@ -270,29 +271,29 @@ Each phase has a corresponding agent skill that provides detailed instructions:
 
 ## Supported Agent Frameworks
 
-| Framework | Skills Location | Commands/Prompts Location |
-|-----------|----------------|--------------------------|
-| Claude Code | `.claude/skills/` | `.claude/commands/` |
-| GitHub Copilot | `.github/skills/` | `.github/prompts/` |
-| Cursor | `.cursor/rules/` | `.cursor/commands/` |
+| Framework      | Skills Location   | Commands/Prompts Location |
+| -------------- | ----------------- | ------------------------- |
+| Claude Code    | `.claude/skills/` | `.claude/commands/`       |
+| GitHub Copilot | `.github/skills/` | `.github/prompts/`        |
+| Cursor         | `.cursor/rules/`  | `.cursor/commands/`       |
 
 ## Acceptance Workflow
 
 Every spec document has a `**Status**` field that tracks its acceptance state:
 
-| Status | Meaning |
-|--------|---------|
-| Draft | Document created, pending review |
-| Accepted | Reviewed and approved by user |
+| Status   | Meaning                          |
+| -------- | -------------------------------- |
+| Draft    | Document created, pending review |
+| Accepted | Reviewed and approved by user    |
 
 Phase transitions are gated by acceptance:
 
-| To Advance To | Must Accept |
-|---|---|
-| storify | proposal.md |
-| techify | proposal.md + all functional-spec.md |
-| taskify | all technical-spec.md |
-| codify | all tasks.md |
+| To Advance To | Must Accept                          |
+| ------------- | ------------------------------------ |
+| storify       | proposal.md                          |
+| techify       | proposal.md + all functional-spec.md |
+| taskify       | all technical-spec.md                |
+| codify        | all tasks.md                         |
 
 Use `/as-accept` to review and mark outputs as Accepted. The AI agent will present
 each file for review and ask for confirmation before changing status.
@@ -329,14 +330,14 @@ which command created them (e.g., `as-new`, `as-storify`, `one-shot`).
 
 ana-speksi tasks reference skills that define how to implement things in your project. Here are typical skills you might have:
 
-| Category | Skills | Purpose |
-|----------|--------|---------|
-| **Backend** | `backend-service`, `backend-router`, `backend-test` | Service layer, API routing, backend tests |
-| **Frontend** | `frontend-component`, `frontend-service`, `frontend-store`, `frontend-dialog`, `frontend-forms` | UI components, services, state management, dialogs, forms |
-| **Database** | `database-design`, `database-model`, `database-repository`, `database-schema-edit-*`, `database-setup-*` | Schema design, ORM models, data access, migrations |
-| **Testing** | `backend-test`, `integration-test`, `e2e-test` | Unit, integration, and end-to-end testing |
-| **Code Quality** | `code-simplifier`, `commit` | Refactoring, git commit conventions |
-| **DevOps** | `ci-cd`, `infrastructure-as-code` | CI/CD pipelines, infrastructure provisioning |
-| **Project** | `create-project`, `skill-creator` | Project scaffolding, creating new skills |
+| Category         | Skills                                                                                                   | Purpose                                                   |
+| ---------------- | -------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| **Backend**      | `backend-service`, `backend-router`, `backend-test`                                                      | Service layer, API routing, backend tests                 |
+| **Frontend**     | `frontend-component`, `frontend-service`, `frontend-store`, `frontend-dialog`, `frontend-forms`          | UI components, services, state management, dialogs, forms |
+| **Database**     | `database-design`, `database-model`, `database-repository`, `database-schema-edit-*`, `database-setup-*` | Schema design, ORM models, data access, migrations        |
+| **Testing**      | `backend-test`, `integration-test`, `e2e-test`                                                           | Unit, integration, and end-to-end testing                 |
+| **Code Quality** | `code-simplifier`, `commit`                                                                              | Refactoring, git commit conventions                       |
+| **DevOps**       | `ci-cd`, `infrastructure-as-code`                                                                        | CI/CD pipelines, infrastructure provisioning              |
+| **Project**      | `create-project`, `skill-creator`                                                                        | Project scaffolding, creating new skills                  |
 
 Skills are project-specific. You define them to match your stack and conventions.

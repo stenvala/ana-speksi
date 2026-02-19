@@ -15,7 +15,7 @@ Create functional specifications for each user story from the proposal.
    Run:
 
    ```
-   uv run ana_speksi accept --toon
+   uv run ana-speksi accept --toon
    ```
 
    If `files_to_accept` is NOT empty, stop and inform the user:
@@ -47,7 +47,7 @@ Create functional specifications for each user story from the proposal.
    Run:
 
    ```
-   uv run ana_speksi status --toon
+   uv run ana-speksi status --toon
    ```
 
    to confirm current state. For each story, create `functional-spec.md`
