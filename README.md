@@ -94,6 +94,7 @@ flowchart TD
     TECHIFY["/as-techify<br/>Research + Tech Specs"]
     TASKIFY["/as-taskify<br/>Implementation Tasks"]
     CODIFY["/as-codify<br/>Write Code"]
+    EXTEND["/as-extend<br/>Document Missing Piece"]
     DOCUFY["/as-docufy<br/>Archive"]
 
     NEW -->|accept| STORIFY
@@ -101,6 +102,8 @@ flowchart TD
     TECHIFY -->|accept| TASKIFY
     TASKIFY -->|accept| CODIFY
     CODIFY --> DOCUFY
+    CODIFY -->|gap discovered| EXTEND
+    EXTEND -->|new requirements| CODIFY
 
     truth -.->|reads architecture| NEW
     truth -.->|reads features| TECHIFY
@@ -117,6 +120,7 @@ project's own skills (external to ana-speksi):
 - **as-techify** reads existing features from truth and identifies which project skills are relevant for implementation
 - **as-taskify** assigns specific project skills to each implementation task
 - **as-codify** makes the AI agent invoke each task's listed skills before writing any code
+- **as-extend** captures missing requirements discovered during codify, feeding them back into the implementation cycle
 - **as-docufy** syncs completed changes back into the ground truth
 
 Project skills (e.g., `backend-service`, `database-model`, `frontend-component`)
@@ -200,6 +204,7 @@ TICKET-123.feature-name/               # Folder name includes ticket ID
       test-automation-plan.md           # Automated test plan (optional)
       manual-testing-plan.md            # Manual test plan (optional)
       tasks.md                          # Implementation tasks
+      extension-*.md                    # Extensions discovered during codify (optional)
     02-another-story/
       ...
 ```
@@ -222,6 +227,7 @@ These commands are available as slash commands in your AI coding assistant:
 | `/as-status [name]`          | Show status and acceptance readiness                           |
 | `/as-from-changes`           | Create truth from existing changes/codebase                    |
 | `/as-debt-analysis <target>` | Analyze technical debt (no code changes)                       |
+| `/as-extend`                 | Document a missing piece discovered during implementation      |
 | `/as-truth-rearrange`        | Rearrange ground truth hierarchy                               |
 
 ## CLI Commands
@@ -249,6 +255,7 @@ Each phase has a corresponding agent skill that provides detailed instructions:
 | Research + Techify | as-techify | Research + technical specs per story                    |
 | Taskify            | as-taskify | Creates task lists referencing skills                   |
 | Codify             | as-codify  | Implements tasks (ONLY code change phase)               |
+| Extension          | as-extend  | Documents missing pieces discovered during codify       |
 | Docufy             | as-docufy  | Archives spec, updates ground truth                     |
 
 ## Ad Hoc Workflows
@@ -260,6 +267,19 @@ Each phase has a corresponding agent skill that provides detailed instructions:
 /as-from-changes --commit abc123 # From a specific commit
 /as-from-changes --codebase      # Initialize truth for entire codebase
 ```
+
+### Story Extensions
+
+When you discover a critical missing piece during implementation (codify phase),
+use `/as-extend` to document it as a story extension:
+
+```
+/as-extend "error handling for batch uploads"   # Document a missing requirement
+```
+
+Extensions capture entirely new functionality not in the original spec -- not
+iterations or refinements, but new requirements discovered while coding. They are
+placed under the relevant story as `extension-*.md` files and tracked in index.md.
 
 ### Technical Debt
 
