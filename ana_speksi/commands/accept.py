@@ -16,6 +16,7 @@ from ana_speksi.status import (
     get_spec_status,
     list_ongoing_specs,
     print_status_json,
+    update_index_task_counts,
 )
 
 console = Console()
@@ -238,6 +239,12 @@ def accept_command(
                 else "[yellow]no Draft status found[/yellow]"
             )
             console.print(f"  {f} -- {status}")
+        # Sync task counts in index.md from actual tasks.md files
+        count_updates = update_index_task_counts(spec.path)
+        if count_updates:
+            console.print("\nSynced task counts:")
+            for story, total, done in count_updates:
+                console.print(f"  {story}: {done}/{total}")
         console.print("\n[green]Acceptance complete.[/green]")
     else:
         console.print("\n[green]All relevant files are already accepted.[/green]")

@@ -13,6 +13,7 @@ from ana_speksi.commands.status import status_command
 from ana_speksi.commands.from_changes import from_changes_command
 from ana_speksi.commands.debt_analysis import debt_analysis_command
 from ana_speksi.commands.update import update_command
+from ana_speksi.commands.sync_counts import sync_counts_command
 from ana_speksi.commands.truth import truth_app
 
 app = typer.Typer(
@@ -32,6 +33,7 @@ app.command("one-shot")(one_shot_command)
 app.command("from-changes")(from_changes_command)
 app.command("debt-analysis")(debt_analysis_command)
 app.command("update")(update_command)
+app.command("sync-counts")(sync_counts_command)
 app.add_typer(truth_app, name="truth")
 
 

@@ -109,9 +109,16 @@ Create implementation tasks for each user story.
    - Add `[implementation-order.md](implementation-order.md)` to the
      Artifacts section (no status indicator -- it is a resource)
    - Change `[]` to `[Draft]` for each story's tasks.md
-   - Add task counts (e.g., "0/5 tasks complete")
+   - Add a placeholder `(0/0 tasks complete)` after each tasks.md entry
    - Ensure each story keeps `**Implementation**: Not Started`
    - Update the phase progress table
+
+   Then run the following command to sync the correct task counts from
+   the actual tasks.md files (do NOT count tasks manually):
+
+   ```
+   uv run ana-speksi sync-counts
+   ```
 
 6. **STOP and present to user**
 

@@ -162,6 +162,41 @@ def count_tasks(tasks_path: Path) -> tuple[int, int]:
     return total, done
 
 
+def update_index_task_counts(spec_path: Path) -> list[tuple[str, int, int]]:
+    """Update task counts in index.md from actual tasks.md files.
+
+    Returns a list of (story_folder, total, done) for each updated story.
+    """
+    index_path = spec_path / "index.md"
+    if not index_path.exists():
+        return []
+
+    content = index_path.read_text(encoding="utf-8")
+    updated: list[tuple[str, int, int]] = []
+
+    stories = list_stories(spec_path)
+    for story in stories:
+        if not story.has_tasks:
+            continue
+        total, done = story.tasks_total, story.tasks_done
+        # Match the tasks.md line with any existing count
+        pattern = (
+            r"(\[tasks\.md\]\(specs/"
+            + re.escape(story.folder)
+            + r"/tasks\.md\))\s*\(\d+/\d+ tasks complete\)"
+        )
+        replacement = rf"\g<1> ({done}/{total} tasks complete)"
+        new_content = re.sub(pattern, replacement, content)
+        if new_content != content:
+            content = new_content
+            updated.append((story.folder, total, done))
+
+    if updated:
+        index_path.write_text(content, encoding="utf-8")
+
+    return updated
+
+
 def get_spec_status(spec_path: Path) -> SpecStatus:
     """Get full status of a spec."""
     phase = detect_phase(spec_path)

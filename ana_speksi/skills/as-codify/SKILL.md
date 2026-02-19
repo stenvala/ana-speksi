@@ -82,8 +82,9 @@ THIS IS THE ONLY PHASE WHERE CODE CHANGES ARE ALLOWED.
    ii. Implement the task following the loaded skill instructions.
    iii. Mark the task as complete in tasks.md: `- [x]`
    iv. **Update index.md** immediately to reflect current progress:
-   update the task count (e.g., "3/10 tasks complete") and set
-   the story's `**Implementation**` line to `In Progress`
+   run `uv run ana-speksi sync-counts` to update the task count
+   (do NOT count tasks manually) and set the story's
+   `**Implementation**` line to `In Progress`
 
    d. **Phase 4: Manual Verification** contains suggestions only (no
    checkboxes). Do NOT execute these -- they are for the user to
