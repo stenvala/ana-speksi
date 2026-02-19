@@ -87,6 +87,10 @@ def init_command(
 # and other interactive steps -- it still notifies you of every action.
 auto_confirm: false
 
+# When true, the AI agent automatically continues to the next story during
+# the codify phase without asking for confirmation between stories.
+auto_story_implementation_continue: false
+
 # Project context injected into all skill instructions.
 # Helps the AI understand your project's conventions.
 context: |

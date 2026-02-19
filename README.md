@@ -184,6 +184,7 @@ All project-wide settings live in `ana-speksi/config.yml`:
 | Setting        | Default | Description                                                                                                                |
 | -------------- | ------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `auto_confirm` | `false` | When `true`, the AI agent skips confirmation prompts during acceptance and commits. It still notifies you of every action. |
+| `auto_story_implementation_continue` | `false` | When `true`, the AI agent automatically continues to the next story during codify without asking for confirmation between stories. |
 | `context`      | (empty) | Project context injected into all skill instructions (tech stack, conventions, constraints).                               |
 | `rules`        | (empty) | Per-phase rules that are injected into the corresponding skill instructions.                                               |
 

@@ -39,6 +39,12 @@ def get_auto_confirm(root: Path | None = None) -> bool:
     return bool(cfg.get("auto_confirm", False))
 
 
+def get_auto_story_implementation_continue(root: Path | None = None) -> bool:
+    """Return the auto_story_implementation_continue setting from ana_speksi/config.yml."""
+    cfg = load_config(root)
+    return bool(cfg.get("auto_story_implementation_continue", False))
+
+
 def get_context(config: dict[str, Any]) -> str | None:
     """Return the project context string from config, or None."""
     ctx = config.get("context")

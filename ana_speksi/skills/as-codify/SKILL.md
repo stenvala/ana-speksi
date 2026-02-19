@@ -100,17 +100,26 @@ THIS IS THE ONLY PHASE WHERE CODE CHANGES ARE ALLOWED.
      g. **Update index.md** to mark the story as complete: set the
      story's `**Implementation**` line to `Complete`
 
-4. **STOP after the story is complete**
+4. **After the story is complete**
 
-   After finishing all tasks in the current story, STOP and present a
-   summary to the user:
+   After finishing all tasks in the current story, present a summary to
+   the user:
    - Which story was completed
    - How many tasks were executed
    - Which stories remain (with their task counts)
    - Any issues or deviations noted during implementation
 
-   The user runs `/as-continue` to process the next story in a fresh
-   context. This prevents context window overflow on large specs.
+   Check `auto_story_implementation_continue` in `ana-speksi/config.yml`.
+
+   **If `auto_story_implementation_continue` is `false` (default)**: STOP
+   and wait for the user. The user runs `/as-continue` to process the
+   next story in a fresh context. This prevents context window overflow
+   on large specs.
+
+   **If `auto_story_implementation_continue` is `true`**: automatically
+   continue to the next story in the implementation-order.md sequence
+   without waiting for user confirmation. Repeat from step 3 for the
+   next story that has incomplete tasks.
 
    The codify phase is complete only when every task across all stories
    is marked `[x]`. After the last story, update index.md with:
@@ -127,7 +136,7 @@ THIS IS THE ONLY PHASE WHERE CODE CHANGES ARE ALLOWED.
 - Execute tasks in phase order within each story (Phase 1 before Phase 2, etc.)
 - CRITICAL: Process stories in the EXACT order defined by implementation-order.md.
   NEVER use folder order (01, 02, 03...) -- it reflects narrative, not dependencies.
-- Process ONE story per invocation to avoid context overflow, then STOP
+- Unless `auto_story_implementation_continue` is `true`, process ONE story per invocation to avoid context overflow, then STOP
 - Mark tasks complete as you go -- never batch
 - Update index.md after every task completion
 - If a task reveals issues in the spec, note them but continue
