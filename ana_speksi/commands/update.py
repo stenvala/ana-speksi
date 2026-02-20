@@ -30,14 +30,14 @@ def update_command(
     """Update agent skills and commands without touching the ana-speksi/ folder.
 
     Regenerates all skill files and command/prompt files for the selected
-    agent frameworks based on the latest ana_speksi skill definitions and
+    agent frameworks based on the latest ana-speksi skill definitions and
     project config. The ana-speksi/ directory (config, ongoing, truth, archive)
     is left untouched.
     """
     config_path = project_dir / ANA_SPEKSI_DIR / "config.yml"
     if not config_path.exists():
         console.print(
-            f"[red]ana_speksi is not initialized in this project. Run 'ana_speksi init' first. Config.yml not found at {config_path}.[/red]"
+            f"[red]ana-speksi is not initialized in this project. Run 'ana-speksi init' first. Config.yml not found at {config_path}.[/red]"
         )
         raise typer.Exit(1)
 
@@ -51,7 +51,7 @@ def update_command(
         else:
             console.print(
                 "[red]No agent framework directories found. "
-                "Specify frameworks with --framework or run 'ana_speksi init'.[/red]"
+                "Specify frameworks with --framework or run 'ana-speksi init'.[/red]"
             )
             raise typer.Exit(1)
 

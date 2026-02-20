@@ -25,8 +25,8 @@ def create_workflow_diagram(output_path="workflow_diagram"):
         "white": "#FFFFFF",
     }
 
-    # Create figure and axis with reduced height due to fewer rows
-    fig, ax = plt.subplots(figsize=(22, 8.5))
+    # Create figure and axis with larger size for bigger text
+    fig, ax = plt.subplots(figsize=(36, 14))
     ax.set_xlim(0, 11)
     ax.set_ylim(0, 5)
     ax.axis("off")
@@ -77,7 +77,7 @@ def create_workflow_diagram(output_path="workflow_diagram"):
                 mid_y + offset_y,
                 label,
                 ha="center",
-                fontsize=9,
+                fontsize=27,
                 color=color,
                 weight="bold",
                 zorder=3,
@@ -92,13 +92,13 @@ def create_workflow_diagram(output_path="workflow_diagram"):
         0.7,
         "Ground Truth (ana-speksi/truth/)",
         colors["external"],
-        fontsize=13,
+        fontsize=42,
     )
 
     # ===== ROW 1 (y=3.2): EXCEPTION BOXES =====
-    draw_box(ax, 2.0, 3.2, 1.6, 0.75, "as-extend\nMissing Piece", colors["exception"], fontsize=11)
+    draw_box(ax, 2.0, 3.2, 1.6, 0.75, "as-extend\nMissing Piece", colors["exception"], fontsize=33)
     draw_box(
-        ax, 9.8, 3.2, 1.8, 0.75, "as-final-verdict\nDeferred Work", colors["exception"], fontsize=11
+        ax, 9.8, 3.2, 1.8, 0.75, "as-final-verdict\nDeferred Work", colors["exception"], fontsize=33
     )
 
     # ===== ROW 2 (y=1.5): WORKFLOW BOXES WITH ARROWS =====
@@ -112,7 +112,7 @@ def create_workflow_diagram(output_path="workflow_diagram"):
     ]
 
     for x, label, color in workflow_boxes:
-        draw_box(ax, x, 1.5, 1.1, 0.75, label, color, fontsize=11)
+        draw_box(ax, x, 1.5, 1.1, 0.75, label, color, fontsize=33)
 
     # Draw horizontal arrows between workflow boxes
     arrow_positions = [
@@ -127,7 +127,7 @@ def create_workflow_diagram(output_path="workflow_diagram"):
         draw_arrow(ax, x1, y1, x2, y2, label, colors["workflow"], width=2.5)
 
     # ===== ROW 3 (y=0.35): SKILLS =====
-    draw_box(ax, 5.5, 0.35, 11, 0.7, "Project Skills (your repo's patterns)", colors["external"], fontsize=13)
+    draw_box(ax, 5.5, 0.35, 11, 0.7, "Project Skills (your repo's patterns)", colors["external"], fontsize=42)
 
     # ===== VERTICAL ARROWS: Ground Truth connections =====
     # NEW reads from truth
