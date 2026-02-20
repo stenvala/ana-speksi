@@ -95,22 +95,39 @@ flowchart TD
     TASKIFY["/as-taskify<br/>Implementation Tasks"]
     CODIFY["/as-codify<br/>Write Code"]
     EXTEND["/as-extend<br/>Document Missing Piece"]
+    VERDICT["/as-final-verdict<br/>Document Deviations"]
     DOCUFY["/as-docufy<br/>Archive"]
 
     NEW -->|accept| STORIFY
     STORIFY -->|accept| TECHIFY
     TECHIFY -->|accept| TASKIFY
     TASKIFY -->|accept| CODIFY
-    CODIFY --> DOCUFY
+    CODIFY -->|optional| VERDICT
     CODIFY -->|gap discovered| EXTEND
     EXTEND -->|new requirements| CODIFY
+    VERDICT --> DOCUFY
+    CODIFY --> DOCUFY
 
     truth -.->|reads architecture| NEW
     truth -.->|reads features| TECHIFY
     TECHIFY -.->|identifies| skills
     TASKIFY -.->|assigns per task| skills
     CODIFY -.->|AI invokes| skills
+    VERDICT -.->|informs| DOCUFY
     DOCUFY -.->|updates| truth
+
+    classDef workflow fill:#4A90E2,stroke:#2E5C8A,color:#fff,stroke-width:2px
+    classDef exception fill:#F5A623,stroke:#C17E1D,color:#fff,stroke-width:2px
+    classDef external fill:#7B68EE,stroke:#5A4A9B,color:#fff,stroke-width:2px
+    classDef acceptLabel fill:#4A90E2,stroke:none,color:#fff
+
+    class NEW,STORIFY,TECHIFY,TASKIFY,CODIFY,DOCUFY workflow
+    class EXTEND,VERDICT exception
+    class truth,skills external
+    linkStyle 0,1,2,3 stroke:#4A90E2,stroke-width:2px,color:#4A90E2
+    linkStyle 4 stroke:#F5A623,stroke-width:2px,color:#F5A623
+    linkStyle 5 stroke:#F5A623,stroke-width:2px,color:#F5A623
+    linkStyle 6 stroke:#4A90E2,stroke-width:2px,color:#4A90E2
 ```
 
 The diagram shows how the workflow interacts with ground truth and your
@@ -121,7 +138,8 @@ project's own skills (external to ana-speksi):
 - **as-taskify** assigns specific project skills to each implementation task
 - **as-codify** makes the AI agent invoke each task's listed skills before writing any code
 - **as-extend** captures missing requirements discovered during codify, feeding them back into the implementation cycle
-- **as-docufy** syncs completed changes back into the ground truth
+- **as-final-verdict** (optional) documents deferred work or implementation deviations for as-docufy to reference when archiving
+- **as-docufy** syncs completed changes back into the ground truth, taking final-verdict decisions into account
 
 Project skills (e.g., `backend-service`, `database-model`, `frontend-component`)
 are defined in your repository, not in ana-speksi. They describe how to implement
@@ -157,6 +175,9 @@ which auto-detects the next phase:
   |
   v
 /as-continue or /as-codify (implementation -- ONLY phase with code changes)
+  |
+  v (optional)
+/as-final-verdict (document deferred work or implementation deviations)
   |
   v
 /as-continue or /as-docufy (archive + update ground truth)
@@ -223,6 +244,7 @@ These commands are available as slash commands in your AI coding assistant:
 | `/as-techify <name>`         | Research + create technical specs                              |
 | `/as-taskify <name>`         | Create implementation tasks                                    |
 | `/as-codify <name>`          | Start/continue implementation (only code-change phase)         |
+| `/as-final-verdict <name>`   | Document deferred work or implementation deviations            |
 | `/as-docufy <name>`          | Archive and update ground truth                                |
 | `/as-one-shot <desc>`        | Run all phases without stopping (auto-accepts all)             |
 | `/as-status [name]`          | Show status and acceptance readiness                           |
@@ -248,16 +270,17 @@ These are run directly in the terminal for setup and status:
 
 Each phase has a corresponding agent skill that provides detailed instructions:
 
-| Phase              | Skill      | What It Does                                            |
-| ------------------ | ---------- | ------------------------------------------------------- |
-| Proposal           | as-new     | Creates proposal.md with problem, stories, requirements |
-| Accept             | as-accept  | Reviews and marks phase outputs as Accepted             |
-| Storify            | as-storify | Creates functional specs with WHEN/THEN scenarios       |
-| Research + Techify | as-techify | Research + technical specs per story                    |
-| Taskify            | as-taskify | Creates task lists referencing skills                   |
-| Codify             | as-codify  | Implements tasks (ONLY code change phase)               |
-| Extension          | as-extend  | Documents missing pieces discovered during codify       |
-| Docufy             | as-docufy  | Archives spec, updates ground truth                     |
+| Phase              | Skill              | What It Does                                            |
+| ------------------ | ------------------ | ------------------------------------------------------- |
+| Proposal           | as-new             | Creates proposal.md with problem, stories, requirements |
+| Accept             | as-accept          | Reviews and marks phase outputs as Accepted             |
+| Storify            | as-storify         | Creates functional specs with WHEN/THEN scenarios       |
+| Research + Techify | as-techify         | Research + technical specs per story                    |
+| Taskify            | as-taskify         | Creates task lists referencing skills                   |
+| Codify             | as-codify          | Implements tasks (ONLY code change phase)               |
+| Extension          | as-extend          | Documents missing pieces discovered during codify       |
+| Final Verdict      | as-final-verdict   | Documents deferred work and implementation deviations   |
+| Docufy             | as-docufy          | Archives spec, updates ground truth                     |
 
 ## Ad Hoc Workflows
 
