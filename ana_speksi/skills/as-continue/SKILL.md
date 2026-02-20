@@ -12,7 +12,7 @@ was auto-generated, you can use either the short name or the full name
 
 **Steps**
 
-1. **Determine the spec to continue**
+1. **Determine the spec and its current phase**
 
    If no name is provided, run:
 
@@ -20,19 +20,13 @@ was auto-generated, you can use either the short name or the full name
    uv run ana-speksi status --toon
    ```
 
-   Show available specs and ask the user to choose.
+   Parse the output to:
+   - Show available specs if multiple exist, and ask the user to choose
+   - Determine the current phase of the selected spec
 
-2. **Check current phase**
+2. **Check acceptance gate (skip if in codify phase)**
 
-   Run:
-
-   ```
-   uv run ana-speksi status --toon
-   ```
-
-   Parse the output to determine the current phase of the selected spec.
-
-3. **Check acceptance gate**
+   If the current phase is NOT `codify`:
 
    Run:
 
@@ -50,9 +44,27 @@ was auto-generated, you can use either the short name or the full name
 
    Do NOT proceed past the gate. Stop and wait for the user.
 
-4. **Story selection (techify, taskify, codify, docufy only)**
+   **Note:** If already in codify phase, skip this check and proceed directly to step 3.
 
-   If the next phase is techify, taskify, codify, or docufy, check the
+3. **If in codify phase, determine next task to code**
+
+   If the current phase is `codify`, run the helper command:
+
+   ```
+   uv run ana-speksi what-to-code-next [spec-name]
+   ```
+
+   This command will:
+   - Examine the tasks.md for the selected story
+   - Determine which tasks are already completed vs. pending
+   - Return the next task to implement with full context
+
+   **Important:** In codify phase, we continue from the next incomplete task.
+   Do NOT reprocess completed tasks or ask for re-acceptance. Just continue coding.
+
+4. **Story selection (techify, taskify, docufy only)**
+
+   If the next phase is techify, taskify, or docufy (NOT codify), check the
    `stories_needing_work` from the continue command output (or compute it
    from the status JSON: stories missing the artifact for the current phase).
 
@@ -72,8 +84,14 @@ was auto-generated, you can use either the short name or the full name
 
    If there is only 1 story needing work, skip this step and process it directly.
 
-5. **Execute the appropriate phase skill**
+5. **Execute the appropriate phase skill (or continue coding)**
 
+   **For codify phase:**
+   Present the next task from step 4 with full context and continue implementing.
+   Do not invoke as-codify again; instead, provide clear instructions to the AI
+   on what to code next based on the task information.
+
+   **For other phases:**
    Based on the current phase, invoke the corresponding skill:
 
    | Current Phase             | Next Action                                 | Skill to Invoke |
