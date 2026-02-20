@@ -108,8 +108,9 @@ flowchart TD
     VERDICT --> DOCUFY
     CODIFY --> DOCUFY
 
-    truth -.->|reads architecture| NEW
-    truth -.->|reads features| TECHIFY
+    NEW -.->|reads documentation| truth
+    STORIFY -.->|reads documentation| truth
+    TECHIFY -.->|reads architecture| truth
     TECHIFY -.->|identifies| skills
     TASKIFY -.->|assigns per task| skills
     CODIFY -.->|AI invokes| skills
@@ -202,12 +203,12 @@ ana-speksi/
 
 All project-wide settings live in `ana-speksi/config.yml`:
 
-| Setting        | Default | Description                                                                                                                |
-| -------------- | ------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `auto_confirm` | `false` | When `true`, the AI agent skips confirmation prompts during acceptance and commits. It still notifies you of every action. |
+| Setting                              | Default | Description                                                                                                                        |
+| ------------------------------------ | ------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `auto_confirm`                       | `false` | When `true`, the AI agent skips confirmation prompts during acceptance and commits. It still notifies you of every action.         |
 | `auto_story_implementation_continue` | `false` | When `true`, the AI agent automatically continues to the next story during codify without asking for confirmation between stories. |
-| `context`      | (empty) | Project context injected into all skill instructions (tech stack, conventions, constraints).                               |
-| `rules`        | (empty) | Per-phase rules that are injected into the corresponding skill instructions.                                               |
+| `context`                            | (empty) | Project context injected into all skill instructions (tech stack, conventions, constraints).                                       |
+| `rules`                              | (empty) | Per-phase rules that are injected into the corresponding skill instructions.                                                       |
 
 ## Spec Structure (under ongoing/)
 
@@ -270,17 +271,17 @@ These are run directly in the terminal for setup and status:
 
 Each phase has a corresponding agent skill that provides detailed instructions:
 
-| Phase              | Skill              | What It Does                                            |
-| ------------------ | ------------------ | ------------------------------------------------------- |
-| Proposal           | as-new             | Creates proposal.md with problem, stories, requirements |
-| Accept             | as-accept          | Reviews and marks phase outputs as Accepted             |
-| Storify            | as-storify         | Creates functional specs with WHEN/THEN scenarios       |
-| Research + Techify | as-techify         | Research + technical specs per story                    |
-| Taskify            | as-taskify         | Creates task lists referencing skills                   |
-| Codify             | as-codify          | Implements tasks (ONLY code change phase)               |
-| Extension          | as-extend          | Documents missing pieces discovered during codify       |
-| Final Verdict      | as-final-verdict   | Documents deferred work and implementation deviations   |
-| Docufy             | as-docufy          | Archives spec, updates ground truth                     |
+| Phase              | Skill            | What It Does                                            |
+| ------------------ | ---------------- | ------------------------------------------------------- |
+| Proposal           | as-new           | Creates proposal.md with problem, stories, requirements |
+| Accept             | as-accept        | Reviews and marks phase outputs as Accepted             |
+| Storify            | as-storify       | Creates functional specs with WHEN/THEN scenarios       |
+| Research + Techify | as-techify       | Research + technical specs per story                    |
+| Taskify            | as-taskify       | Creates task lists referencing skills                   |
+| Codify             | as-codify        | Implements tasks (ONLY code change phase)               |
+| Extension          | as-extend        | Documents missing pieces discovered during codify       |
+| Final Verdict      | as-final-verdict | Documents deferred work and implementation deviations   |
+| Docufy             | as-docufy        | Archives spec, updates ground truth                     |
 
 ## Ad Hoc Workflows
 

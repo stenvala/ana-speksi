@@ -31,30 +31,34 @@ def create_workflow_diagram(output_path="workflow_diagram"):
 
     # Graph attributes for professional appearance
     dot.attr(
-        rankdir="TB",               # Top to Bottom
+        rankdir="LR",               # Left to Right (horizontal workflow)
         splines="ortho",            # Orthogonal edges for cleaner lines
-        nodesep="0.5",
-        ranksep="0.8",
+        nodesep="0.6",
+        ranksep="1.2",
     )
     dot.attr("node", shape="box", style="rounded,filled", fontname="Helvetica")
     dot.attr("edge", fontname="Helvetica", fontsize="10")
 
-    # External elements (Ground Truth, Project Skills)
+    # External elements (Ground Truth, Project Skills) - wider boxes
     dot.node(
         "truth",
-        "Ground Truth\n(ana-speksi/truth/)",
+        "Ground Truth (ana-speksi/truth/)",
         fillcolor=colors["external"],
         color="#5A4A9B",
         fontcolor="white",
         penwidth="2",
+        width="3",
+        height="0.6",
     )
     dot.node(
         "skills",
-        "Project Skills\n(your repo's patterns)",
+        "Project Skills (your repo's patterns)",
         fillcolor=colors["external"],
         color="#5A4A9B",
         fontcolor="white",
         penwidth="2",
+        width="3",
+        height="0.6",
     )
 
     # Main workflow nodes
@@ -93,42 +97,58 @@ def create_workflow_diagram(output_path="workflow_diagram"):
             penwidth="2",
         )
 
-    # Main workflow edges (accept gates)
-    workflow_edges = [
-        ("new", "storify", "accept"),
-        ("storify", "techify", "accept"),
-        ("techify", "taskify", "accept"),
-        ("taskify", "codify", "accept"),
-    ]
+    # Create subgraph for vertical grouping (Ground Truth on top)
+    with dot.subgraph(name="cluster_top") as top:
+        top.attr(style="invis")
+        top.node("truth")
 
-    for source, target, label in workflow_edges:
-        dot.edge(source, target, label, color=colors["workflow"], penwidth="2")
+    # Create subgraph for main workflow (middle)
+    with dot.subgraph(name="cluster_workflow") as workflow:
+        workflow.attr(style="invis")
 
-    # Optional/Exception edges
-    dot.edge("codify", "verdict", "optional", color=colors["exception"], penwidth="2")
-    dot.edge("codify", "extend", "gap discovered", color=colors["exception"], penwidth="2")
-    dot.edge("extend", "codify", "new requirements", color=colors["exception"], penwidth="2")
+        # Main workflow edges (accept gates) - horizontal flow
+        workflow_edges = [
+            ("new", "storify", "accept"),
+            ("storify", "techify", "accept"),
+            ("techify", "taskify", "accept"),
+            ("taskify", "codify", "accept"),
+        ]
 
-    # Final archival edges
-    dot.edge("verdict", "docufy", color=colors["workflow"], penwidth="2")
-    dot.edge("codify", "docufy", color=colors["workflow"], penwidth="2")
+        for source, target, label in workflow_edges:
+            dot.edge(source, target, label, color=colors["workflow"], penwidth="2")
+
+        # Optional/Exception edges branching up/down from codify
+        dot.edge("codify", "extend", "gap discovered", color=colors["exception"], penwidth="2")
+        dot.edge("extend", "codify", "new requirements", color=colors["exception"], penwidth="2")
+        dot.edge("codify", "verdict", "optional", color=colors["exception"], penwidth="2")
+
+        # Final archival edges
+        dot.edge("verdict", "docufy", color=colors["workflow"], penwidth="2")
+        dot.edge("codify", "docufy", color=colors["workflow"], penwidth="2")
+
+    # Create subgraph for bottom (Project Skills)
+    with dot.subgraph(name="cluster_bottom") as bottom:
+        bottom.attr(style="invis")
+        bottom.node("skills")
 
     # Integration edges with external elements
     dot.edge(
         "truth",
         "new",
-        "reads\narchitecture",
+        "reads",
         style="dashed",
         color=colors["external"],
         fontcolor=colors["external"],
+        constraint="false",
     )
     dot.edge(
         "truth",
         "techify",
-        "reads\nfeatures",
+        "reads",
         style="dashed",
         color=colors["external"],
         fontcolor=colors["external"],
+        constraint="false",
     )
     dot.edge(
         "techify",
@@ -137,6 +157,7 @@ def create_workflow_diagram(output_path="workflow_diagram"):
         style="dashed",
         color=colors["external"],
         fontcolor=colors["external"],
+        constraint="false",
     )
     dot.edge(
         "taskify",
@@ -145,6 +166,7 @@ def create_workflow_diagram(output_path="workflow_diagram"):
         style="dashed",
         color=colors["external"],
         fontcolor=colors["external"],
+        constraint="false",
     )
     dot.edge(
         "codify",
@@ -153,6 +175,7 @@ def create_workflow_diagram(output_path="workflow_diagram"):
         style="dashed",
         color=colors["external"],
         fontcolor=colors["external"],
+        constraint="false",
     )
     dot.edge(
         "verdict",
@@ -169,6 +192,7 @@ def create_workflow_diagram(output_path="workflow_diagram"):
         style="dashed",
         color=colors["external"],
         fontcolor=colors["external"],
+        constraint="false",
     )
 
     # Render the graph
