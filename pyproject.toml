@@ -18,6 +18,7 @@ dependencies = [
     "pyyaml>=6.0",
     "toons>=0.5.3",
     "graphviz>=0.21",
+    "matplotlib>=3.7.0",
 ]
 
 [project.scripts]

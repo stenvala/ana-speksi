@@ -1,228 +1,189 @@
 #!/usr/bin/env python3
 """
-Generate a professional workflow diagram for the ana-speksi framework.
-Uses Graphviz to create a compact, visually appealing PNG suitable for LinkedIn.
+Generate a table-style workflow diagram for the ana-speksi framework using matplotlib.
+Creates a grid-based layout matching the README workflow.
 """
 
-from graphviz import Digraph
+import matplotlib.pyplot as plt
+from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
 
 
 def create_workflow_diagram(output_path="workflow_diagram"):
     """
-    Create and render the ana-speksi workflow diagram.
+    Create and render the ana-speksi workflow diagram as a table.
 
     Args:
         output_path: Path and filename without extension (default: workflow_diagram.png)
     """
 
-    # Color scheme matching the mermaid diagram
+    # Colors
     colors = {
-        "workflow": "#4A90E2",      # Blue - normal workflow
-        "start": "#F59E0B",         # Amber - starting point
-        "exception": "#D946EF",     # Magenta - optional/exception (easier to see)
-        "external": "#8B6F47",      # Brown - external elements
+        "workflow": "#4A90E2",      # Blue
+        "start": "#DD9D2F",         # Amber
+        "exception": "#D946EF",     # Magenta
+        "external": "#257403",      # Dark green
+        "white": "#FFFFFF",
     }
 
-    # Create a new directed graph
-    dot = Digraph(
-        name="ana-speksi-workflow",
-        comment="ana-speksi Spec-Driven Development Workflow",
-        format="png",
-    )
+    # Create figure and axis with reduced height due to fewer rows
+    fig, ax = plt.subplots(figsize=(22, 8.5))
+    ax.set_xlim(0, 11)
+    ax.set_ylim(0, 5)
+    ax.axis("off")
 
-    # Graph attributes for professional appearance with improved spacing
-    dot.attr(
-        rankdir="LR",               # Left to Right (horizontal workflow)
-        splines="line",             # Straight lines instead of orthogonal/curved
-        nodesep="1.3",              # Spacing to span full width of truth box
-        ranksep="0.5",              # Compact vertical spacing
-        margin="0.05,0.1",          # Minimal left margin, normal top/bottom
-        pad="0.1",
-        overlap="false",
-        center="false",
-    )
-    dot.attr("node", shape="box", style="rounded,filled", fontname="Helvetica", margin="0.15")
-    dot.attr("edge", fontname="Helvetica", fontsize="11", labelloc="center", arrowsize="1.2")
+    # Helper function to draw box
+    def draw_box(ax, x, y, width, height, text, fillcolor, textcolor="white", fontsize=11, style="round"):
+        box = FancyBboxPatch(
+            (x - width / 2, y - height / 2),
+            width,
+            height,
+            boxstyle="round,pad=0.1" if style == "round" else "square,pad=0.05",
+            linewidth=2,
+            edgecolor=fillcolor,
+            facecolor=fillcolor,
+            zorder=2,
+        )
+        ax.add_patch(box)
+        ax.text(
+            x,
+            y,
+            text,
+            ha="center",
+            va="center",
+            fontsize=fontsize,
+            color=textcolor,
+            weight="bold",
+            zorder=3,
+        )
 
-    # Ground Truth - full width at top
-    dot.node(
-        "truth",
+    # Helper function to draw arrow
+    def draw_arrow(ax, x1, y1, x2, y2, label="", color="black", linestyle="solid", width=2.5):
+        arrow = FancyArrowPatch(
+            (x1, y1),
+            (x2, y2),
+            arrowstyle="->",
+            mutation_scale=22,
+            linewidth=width,
+            color=color,
+            linestyle=linestyle,
+            zorder=1,
+        )
+        ax.add_patch(arrow)
+        if label:
+            mid_x, mid_y = (x1 + x2) / 2, (y1 + y2) / 2
+            offset_y = 0.16 if linestyle == "solid" else 0.1
+            ax.text(
+                mid_x,
+                mid_y + offset_y,
+                label,
+                ha="center",
+                fontsize=9,
+                color=color,
+                weight="bold",
+                zorder=3,
+            )
+
+    # ===== ROW 0 (y=4.5): GROUND TRUTH =====
+    draw_box(
+        ax,
+        5.5,
+        4.5,
+        11,
+        0.7,
         "Ground Truth (ana-speksi/truth/)",
-        fillcolor=colors["external"],
-        color="#654321",
-        fontcolor="white",
-        fontsize="12",
-        penwidth="2",
-        width="20",
-        height="0.65",
-        fixedsize="true",
+        colors["external"],
+        fontsize=13,
     )
 
-    # Main workflow nodes (all on same rank)
-    workflow_nodes = [
-        ("new", "as-new\nCreate Proposal"),
-        ("storify", "as-storify\nFunctional Specs"),
-        ("techify", "as-techify\nResearch + Tech Specs"),
-        ("taskify", "as-taskify\nImplementation Tasks"),
-        ("codify", "as-codify\nWrite Code"),
-        ("docufy", "as-docufy\nArchive"),
+    # ===== ROW 1 (y=3.2): EXCEPTION BOXES =====
+    draw_box(ax, 2.0, 3.2, 1.6, 0.75, "as-extend\nMissing Piece", colors["exception"], fontsize=11)
+    draw_box(
+        ax, 9.8, 3.2, 1.8, 0.75, "as-final-verdict\nDeferred Work", colors["exception"], fontsize=11
+    )
+
+    # ===== ROW 2 (y=1.5): WORKFLOW BOXES WITH ARROWS =====
+    workflow_boxes = [
+        (0.8, "as-new\nCreate Proposal", colors["start"]),
+        (2.2, "as-storify\nFunctional Specs", colors["workflow"]),
+        (3.8, "as-techify\nResearch + Tech", colors["workflow"]),
+        (5.5, "as-taskify\nImplementation", colors["workflow"]),
+        (7.2, "as-codify\nWrite Code", colors["workflow"]),
+        (9.0, "as-docufy\nArchive", colors["workflow"]),
     ]
 
-    for i, (node_id, label) in enumerate(workflow_nodes):
-        # Use amber color for the starting point (as-new)
-        fill_color = colors["start"] if node_id == "new" else colors["workflow"]
-        border_color = "#D97706" if node_id == "new" else "#1E40AF"
+    for x, label, color in workflow_boxes:
+        draw_box(ax, x, 1.5, 1.1, 0.75, label, color, fontsize=11)
 
-        dot.node(
-            node_id,
-            label,
-            fillcolor=fill_color,
-            color=border_color,
-            fontcolor="white",
-            fontsize="11",
-            penwidth="2",
-            width="1.8",
-            height="0.85",
-            fixedsize="true",
-        )
-
-    # Exception/Optional nodes (side by side)
-    exception_nodes = [
-        ("extend", "as-extend\nMissing Piece"),
-        ("verdict", "as-final-verdict\nDeferred Work"),
+    # Draw horizontal arrows between workflow boxes
+    arrow_positions = [
+        (1.35, 1.5, 1.85, 1.5, "accept"),
+        (2.75, 1.5, 3.25, 1.5, "accept"),
+        (4.35, 1.5, 5.05, 1.5, "accept"),
+        (5.95, 1.5, 6.7, 1.5, "accept"),
+        (7.7, 1.5, 8.4, 1.5, "accept"),
     ]
 
-    for node_id, label in exception_nodes:
-        dot.node(
-            node_id,
-            label,
-            fillcolor=colors["exception"],
-            color="#9D174D",
-            fontcolor="white",
-            fontsize="10",
-            penwidth="2",
-            width="1.8",
-            height="0.80",
-            fixedsize="true",
-        )
+    for x1, y1, x2, y2, label in arrow_positions:
+        draw_arrow(ax, x1, y1, x2, y2, label, colors["workflow"], width=2.5)
 
-    # Project Skills - full width at bottom
-    dot.node(
-        "skills",
-        "Project Skills (your repo's patterns)",
-        fillcolor=colors["external"],
-        color="#654321",
-        fontcolor="white",
-        fontsize="12",
-        penwidth="2",
-        width="20",
-        height="0.65",
-        fixedsize="true",
-    )
+    # ===== ROW 3 (y=0.35): SKILLS =====
+    draw_box(ax, 5.5, 0.35, 11, 0.7, "Project Skills (your repo's patterns)", colors["external"], fontsize=13)
 
-    # Force Ground Truth on top rank
-    with dot.subgraph(name="rank_0") as rank0:
-        rank0.attr(rank="source")
-        rank0.node("truth")
+    # ===== VERTICAL ARROWS: Ground Truth connections =====
+    # NEW reads from truth
+    draw_arrow(ax, 4.8, 4.15, 0.8, 2.15, "reads", colors["external"], width=1.5)
 
-    # Force main workflow on same rank
-    with dot.subgraph(name="rank_1") as rank1:
-        rank1.attr(rank="same")
-        for node_id, _ in workflow_nodes:
-            rank1.node(node_id)
+    # STORIFY reads from truth
+    draw_arrow(ax, 5.2, 4.15, 2.2, 2.15, "reads", colors["external"], width=1.5)
 
-    # Force extend and verdict side by side on same rank
-    with dot.subgraph(name="rank_2") as rank2:
-        rank2.attr(rank="same")
-        for node_id, _ in exception_nodes:
-            rank2.node(node_id)
+    # TECHIFY reads from truth
+    draw_arrow(ax, 5.5, 4.15, 3.8, 2.15, "reads", colors["external"], width=1.5)
 
-    # Force skills on bottom rank
-    with dot.subgraph(name="rank_3") as rank3:
-        rank3.attr(rank="sink")
-        rank3.node("skills")
+    # ===== VERTICAL ARROWS: Workflow to Skills =====
+    # TECHIFY identifies skills
+    draw_arrow(ax, 4.1, 1.1, 5.0, 0.75, "identifies", colors["external"], width=1.5)
 
-    # Main workflow edges (accept gates) - horizontal flow
-    workflow_edges = [
-        ("new", "storify", "accept"),
-        ("storify", "techify", "accept"),
-        ("techify", "taskify", "accept"),
-        ("taskify", "codify", "accept"),
-        ("codify", "docufy", "accept"),
-    ]
+    # TASKIFY assigns skills
+    draw_arrow(ax, 5.5, 1.1, 5.5, 0.75, "assigns", colors["external"], width=1.5)
 
-    for source, target, label in workflow_edges:
-        dot.edge(
-            source,
-            target,
-            label,
-            color=colors["workflow"],
-            penwidth="2.5",
-            headport="w",
-            tailport="e",
-        )
+    # CODIFY invokes skills
+    draw_arrow(ax, 7.2, 1.1, 6.2, 0.75, "invokes", colors["external"], width=1.5)
 
-    # Optional/Exception edges branching off (dashed for distinction)
-    dot.edge("codify", "extend", "gap discovered", color=colors["exception"], penwidth="2", style="dashed")
-    dot.edge("extend", "codify", "new requirements", color=colors["exception"], penwidth="2", style="dashed")
-    dot.edge("codify", "verdict", "optional", color=colors["exception"], penwidth="2", style="dashed")
-    dot.edge("verdict", "docufy", "informs", color=colors["exception"], penwidth="2", style="dashed")
+    # DOCUFY updates truth
+    draw_arrow(ax, 8.8, 2.15, 8.8, 4.15, "updates", colors["external"], width=1.5)
 
-    # Integration edges with external elements (solid lines, subtle but clear)
-    dot.edge(
-        "truth",
-        "new",
-        "reads",
-        color=colors["external"],
-        fontcolor=colors["external"],
-        penwidth="1.5",
-        constraint="false",
-    )
-    dot.edge(
-        "techify",
-        "skills",
-        "identifies",
-        color=colors["external"],
-        fontcolor=colors["external"],
-        penwidth="1.5",
-        constraint="false",
-    )
-    dot.edge(
-        "taskify",
-        "skills",
-        "assigns",
-        color=colors["external"],
-        fontcolor=colors["external"],
-        penwidth="1.5",
-        constraint="false",
-    )
-    dot.edge(
-        "codify",
-        "skills",
-        "invokes",
-        color=colors["external"],
-        fontcolor=colors["external"],
-        penwidth="1.5",
-        constraint="false",
-    )
-    dot.edge(
-        "docufy",
-        "truth",
-        "updates",
-        color=colors["external"],
-        fontcolor=colors["external"],
-        penwidth="1.5",
-        constraint="false",
-    )
+    # ===== EXCEPTION FLOW =====
+    # CODIFY to EXTEND (gap discovered)
+    draw_arrow(ax, 6.7, 1.85, 2.5, 2.85, "gap discovered", colors["exception"], "dashed", width=2)
 
-    # Render the graph
-    output_file = dot.render(output_path, cleanup=True)
-    print(f"✅ Workflow diagram saved to: {output_file}")
-    print(f"   File size: {__import__('os').path.getsize(output_file) / 1024:.1f} KB")
-    print(f"\nColor legend:")
-    print(f"  🔵 Blue   = Normal workflow steps")
-    print(f"  🟠 Orange = Optional/exception steps (as-extend, as-final-verdict)")
-    print(f"  🟣 Purple = External elements (Ground Truth, Project Skills)")
+    # EXTEND back to CODIFY (new requirements)
+    draw_arrow(ax, 2.5, 3.55, 6.7, 1.85, "new requirements", colors["exception"], "dashed", width=2)
+
+    # CODIFY to VERDICT (optional)
+    draw_arrow(ax, 7.6, 1.85, 9.3, 2.85, "optional", colors["exception"], "dashed", width=2)
+
+    # VERDICT to DOCUFY (informs)
+    draw_arrow(ax, 9.3, 3.55, 9.0, 2.2, "informs", colors["exception"], "dashed", width=2)
+
+    # Save figure
+    plt.tight_layout()
+    plt.savefig(f"{output_path}.png", dpi=150, bbox_inches="tight", facecolor="white")
+    print(f"✅ Workflow diagram saved to: {output_path}.png")
+
+    import os
+    file_size = os.path.getsize(f"{output_path}.png") / 1024
+    print(f"   File size: {file_size:.1f} KB")
+    print(f"\nUpdates applied:")
+    print(f"  ✓ Dark green (#257403) for Ground Truth and Skills")
+    print(f"  ✓ Increased font sizes (11-13pt for boxes)")
+    print(f"  ✓ Reduced vertical whitespace (3 rows instead of 7)")
+    print(f"  ✓ All relationships from README.md integrated:")
+    print(f"    - NEW, STORIFY, TECHIFY read from Ground Truth")
+    print(f"    - TECHIFY identifies skills, TASKIFY assigns, CODIFY invokes")
+    print(f"    - DOCUFY updates Ground Truth")
+    print(f"    - CODIFY ↔ EXTEND (gap/new requirements)")
+    print(f"    - CODIFY → VERDICT → DOCUFY (optional)")
+    print(f"  ✓ Arrow widths maintained (2.5pt horizontal, 1.5pt vertical)")
 
 
 if __name__ == "__main__":
