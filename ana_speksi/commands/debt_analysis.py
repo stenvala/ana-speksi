@@ -52,7 +52,7 @@ def debt_analysis_command(
 
     console.print(f"\n[bold]Technical Debt Analysis[/bold]")
     console.print(f"Target: [cyan]{target}[/cyan]")
-    console.print(f"Document: [cyan]ana_speksi/technical-debt/{debt_filename}[/cyan]")
+    console.print(f"Document: [cyan]ana-speksi/technical-debt/{debt_filename}[/cyan]")
     console.print(
         "\nThe AI agent should now execute the [bold cyan]as-debt-analysis[/bold cyan] skill"
     )
@@ -62,5 +62,5 @@ def debt_analysis_command(
     )
     console.print(
         "\nAfter analysis, you can run: "
-        f"uv run ana_speksi new --from-debt ana_speksi/technical-debt/{debt_filename}"
+        f"uv run ana-speksi new --from-debt ana-speksi/technical-debt/{debt_filename}"
     )

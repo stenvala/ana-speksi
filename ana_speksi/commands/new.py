@@ -103,4 +103,4 @@ def new_command(
     console.print(f"  Location: {spec_dir}")
     console.print(f"  Phase: [cyan]proposal[/cyan]")
     console.print(f"\nNext: Review and fill in proposal.md, then run:")
-    console.print(f"  uv run ana_speksi continue {folder_name}")
+    console.print(f"  uv run ana-speksi continue {folder_name}")

@@ -65,11 +65,11 @@ def init_command(
             raise typer.Exit(1)
 
     # Create directory structure
-    console.print(f"\nCreating ana_speksi directory structure at [cyan]{root}[/cyan]")
+    console.print(f"\nCreating ana-speksi directory structure at [cyan]{root}[/cyan]")
     ensure_dirs(root)
     console.print("  Created directories:")
     for sub in SUBDIRS:
-        console.print(f"    ana_speksi/{sub}/")
+        console.print(f"    ana-speksi/{sub}/")
 
     # Generate skills
     console.print("\nGenerating agent skills...")
@@ -109,10 +109,10 @@ rules:
 """,
             encoding="utf-8",
         )
-        console.print(f"  Created [cyan]ana_speksi/config.yml[/cyan]")
+        console.print(f"  Created [cyan]ana-speksi/config.yml[/cyan]")
 
     console.print("\n[bold green]ana_speksi initialized successfully.[/bold green]")
     console.print("\nNext steps:")
-    console.print("  1. Edit ana_speksi/config.yml to add your project context")
-    console.print("  2. Run: uv run ana_speksi new")
+    console.print("  1. Edit ana-speksi/config.yml to add your project context")
+    console.print("  2. Run: uv run ana-speksi new")
     console.print("     Or use the /as-new slash command in your AI assistant")

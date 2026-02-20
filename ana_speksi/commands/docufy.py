@@ -57,8 +57,8 @@ def docufy_command(
 
     shutil.move(str(source_dir), str(archive_dir))
     console.print(f"\nArchived [bold]{spec.name}[/bold] to:")
-    console.print(f"  ana_speksi/archive/{archive_name}/")
-    console.print("\nThe AI agent should now update ground truth (ana_speksi/truth/).")
+    console.print(f"  ana-speksi/archive/{archive_name}/")
+    console.print("\nThe AI agent should now update ground truth (ana-speksi/truth/).")
     console.print(
         "Invoke the [bold cyan]as-docufy[/bold cyan] skill for detailed instructions."
     )

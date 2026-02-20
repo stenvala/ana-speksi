@@ -32,7 +32,7 @@ def truth_show() -> None:
         )
         return
 
-    tree = Tree(f"[bold]ana_speksi/truth/[/bold]")
+    tree = Tree(f"[bold]ana-speksi/truth/[/bold]")
     _build_tree(truth_dir, tree)
     console.print(tree)
 

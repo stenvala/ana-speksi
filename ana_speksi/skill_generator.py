@@ -54,7 +54,7 @@ def _copy_resources(src_skill_name: str, dest_dir: Path) -> None:
 
 def generate_skills(project_root: Path, frameworks: list[AgentFramework]) -> None:
     """Generate skill and command files for the selected agent frameworks."""
-    config = load_config(project_root / "ana_speksi")
+    config = load_config(project_root / "ana-speksi")
     for framework in frameworks:
         _generate_for_framework(project_root, framework, config)
 

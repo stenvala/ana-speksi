@@ -29,7 +29,22 @@ Archive a completed spec and update the ground truth.
 
    Do NOT proceed if any tasks are incomplete.
 
-2. **Update ground truth**
+2. **Check for deferred work (final-verdict.md)**
+
+   Check if `final-verdict.md` exists at the spec root (same directory as `proposal.md`).
+
+   If found:
+   - Read the **Summary** section to identify which stories are deferred
+   - Read the **Impact** section to understand implications for the current spec
+   - Use these decisions to inform which specs are archived vs. kept in truth
+   - Deferred stories should NOT be archived yet -- they may be continued in future iterations via `/as-continue`
+
+   If NOT found:
+   - Proceed normally -- all completed stories will be archived
+
+   This step aligns with the `/as-final-verdict` skill which documents deferred work and implementation deviations.
+
+3. **Update ground truth**
 
    **Story selection**: If `/as-continue` specified particular stories to
    process, only update truth for those stories. Otherwise, process all
@@ -69,7 +84,7 @@ Archive a completed spec and update the ground truth.
    The truth is a living document that represents the current state of the
    system. Merge the new spec's content into the existing truth structure.
 
-3. **Check for out-of-spec code changes**
+4. **Check for out-of-spec code changes**
 
    Ask the user:
 
@@ -84,12 +99,12 @@ Archive a completed spec and update the ground truth.
 
    Proceed with archiving regardless -- this is informational only.
 
-4. **Archive the spec**
+5. **Archive the spec**
 
    Move the spec folder from `ana-speksi/ongoing/<name>/` to
    `ana-speksi/archive/<date>-<name>/` where date is `yyyy-mm-dd` format.
 
-5. **Report**
+6. **Report**
 
    Show what was archived and where truth was updated.
 

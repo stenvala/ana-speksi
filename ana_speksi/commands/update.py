@@ -1,4 +1,4 @@
-"""ana_speksi update -- regenerate skills and commands without touching ana_speksi/."""
+"""ana-speksi update -- regenerate skills and commands without touching ana-speksi/."""
 
 from __future__ import annotations
 
@@ -27,11 +27,11 @@ def update_command(
         help="Project root directory.",
     ),
 ) -> None:
-    """Update agent skills and commands without touching the ana_speksi/ folder.
+    """Update agent skills and commands without touching the ana-speksi/ folder.
 
     Regenerates all skill files and command/prompt files for the selected
     agent frameworks based on the latest ana_speksi skill definitions and
-    project config. The ana_speksi/ directory (config, ongoing, truth, archive)
+    project config. The ana-speksi/ directory (config, ongoing, truth, archive)
     is left untouched.
     """
     config_path = project_dir / ANA_SPEKSI_DIR / "config.yml"

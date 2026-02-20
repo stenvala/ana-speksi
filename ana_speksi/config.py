@@ -9,12 +9,12 @@ from ana_speksi.status import get_ana_speksi_root
 
 
 # ---------------------------------------------------------------------------
-# Project config (ana_speksi/config.yml)
+# Project config (ana-speksi/config.yml)
 # ---------------------------------------------------------------------------
 
 
 def load_config(root: Path | None = None) -> dict[str, Any]:
-    """Load ana_speksi/config.yml and return its contents.
+    """Load ana-speksi/config.yml and return its contents.
 
     Returns an empty dict if the file does not exist or cannot be parsed.
     """
@@ -34,13 +34,13 @@ def load_config(root: Path | None = None) -> dict[str, Any]:
 
 
 def get_auto_confirm(root: Path | None = None) -> bool:
-    """Return the auto_confirm setting from ana_speksi/config.yml."""
+    """Return the auto_confirm setting from ana-speksi/config.yml."""
     cfg = load_config(root)
     return bool(cfg.get("auto_confirm", False))
 
 
 def get_auto_story_implementation_continue(root: Path | None = None) -> bool:
-    """Return the auto_story_implementation_continue setting from ana_speksi/config.yml."""
+    """Return the auto_story_implementation_continue setting from ana-speksi/config.yml."""
     cfg = load_config(root)
     return bool(cfg.get("auto_story_implementation_continue", False))
 
