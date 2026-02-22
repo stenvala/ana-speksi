@@ -29,10 +29,14 @@ without stopping between phases.
 
 5. Execute as-codify (implementation)
 
-6. Execute as-docufy (archive + truth update)
+6. **STOP. Do NOT execute as-docufy.** After codify completes, you MUST
+   stop and wait for the user to verify the implementation. Do not proceed
+   to as-docufy or any further phase without explicit user approval.
 
 Follow each phase's skill instructions in sequence. Do not stop between
 phases unless an error occurs that requires user intervention.
+After step 5 (codify), always stop and require user verification before
+proceeding.
 
 **Auto-acceptance**: In one-shot mode, all acceptance gates are bypassed
 because every document is immediately set to Accepted after creation.
