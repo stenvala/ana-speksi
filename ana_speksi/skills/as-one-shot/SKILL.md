@@ -28,6 +28,9 @@ without stopping between phases.
    - Set `**Generated with**: one-shot` in each tasks.md
 
 5. Execute as-codify (implementation)
+   - Regardless of project configuration, treat `auto_story_implementation_continue`
+     as `true`. Do NOT prompt the user for whether to continue after each story
+     is implemented — automatically proceed to the next story.
 
 6. **STOP. Do NOT execute as-docufy.** After codify completes, you MUST
    stop and wait for the user to verify the implementation. Do not proceed
