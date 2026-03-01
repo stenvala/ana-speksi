@@ -1,7 +1,6 @@
 ---
 name: as-debt-analysis
 description: Analyze technical debt by comparing code against skills.
-phase: null
 ---
 
 Analyze technical debt by comparing code against skills or examining a folder.
@@ -9,6 +8,7 @@ Analyze technical debt by comparing code against skills or examining a folder.
 NO CODE CHANGES ARE ALLOWED during this analysis.
 
 **Input**: One of:
+
 - A folder path to analyze
 - A skill name to check alignment against
 
@@ -46,6 +46,7 @@ NO CODE CHANGES ARE ALLOWED during this analysis.
    - Run `as-new` pointing to this debt document to create a clearing plan
 
 **Guardrails**
+
 - Do NOT modify any code
 - Be specific about file paths and line numbers
 - Reference skills accurately

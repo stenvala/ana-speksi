@@ -1,7 +1,12 @@
 {
   "permissions": {
     "allow": [
-      "Read(//Users/stenvala/repos/stenvala.github/ana-speksi/**)"
+      "Read(//Users/stenvala/repos/stenvala.github/ana-speksi/**)",
+      "Bash(git -C /Users/stenvala/repos/stenvala.github/ana-speksi show HEAD:ana_speksi/skills/as-final-verdict/SKILL.md)",
+      "Bash(git -C /Users/stenvala/repos/stenvala.github/ana-speksi diff ana_speksi/skills/as-final-verdict/SKILL.md)"
+    ],
+    "additionalDirectories": [
+      "/Users/stenvala/repos/stenvala.github/ana-speksi/ana_speksi"
     ]
   }
 }

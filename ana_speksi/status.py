@@ -7,6 +7,7 @@ from pathlib import Path
 
 from rich.console import Console
 from rich.table import Table
+from rich.tree import Tree
 
 from ana_speksi.models import (
     ARCHIVE_DIR,
@@ -299,3 +300,134 @@ def print_status_json(root: Path) -> dict:
             }
         )
     return {"ongoing": result}
+
+
+
+def stories_needing_work(spec: SpecStatus) -> list[dict]:
+    """Return stories that need work in the current phase."""
+    if spec.phase in (Phase.PROPOSAL, Phase.STORIFY):
+        return []
+
+    result = []
+    for s in spec.stories:
+        needs_work = False
+        if spec.phase in (Phase.RESEARCH, Phase.TECHIFY):
+            needs_work = not s.has_technical_spec
+        elif spec.phase == Phase.TASKIFY:
+            needs_work = not s.has_tasks
+        elif spec.phase == Phase.CODIFY:
+            needs_work = s.tasks_done < s.tasks_total or s.tasks_total == 0
+        elif spec.phase == Phase.DOCUFY:
+            needs_work = True
+
+        if needs_work:
+            result.append({"folder": s.folder, "name": s.name})
+
+    return result
+
+
+# ---------------------------------------------------------------------------
+# Task extraction (moved from commands/what_to_code_next.py)
+# ---------------------------------------------------------------------------
+
+
+def extract_next_task(content: str) -> dict | None:
+    """Extract the next incomplete task from tasks.md content.
+
+    Returns a dict with:
+    - task_text: the task title/description
+    - description: expanded description if available (under ### Details)
+    - context: context/implementation notes if available (under ### Implementation Context)
+    """
+    lines = content.split("\n")
+
+    for i, line in enumerate(lines):
+        # Look for unchecked task boxes
+        if re.match(r"^- \[ \]", line):
+            task_text = line.replace("- [ ] ", "").strip()
+            current_task: dict = {
+                "task_text": task_text,
+                "description": None,
+                "context": None,
+            }
+
+            # Look ahead for details and context
+            j = i + 1
+            current_section = None
+            section_content: list[str] = []
+
+            while j < len(lines):
+                next_line = lines[j]
+
+                # Stop at next task
+                if re.match(r"^- \[[ x]\]", next_line):
+                    break
+
+                # Check for section headers
+                if next_line.startswith("### "):
+                    if current_section and section_content:
+                        content_text = "\n".join(section_content).strip()
+                        if current_section == "Details":
+                            current_task["description"] = content_text
+                        elif current_section in (
+                            "Context",
+                            "Implementation Context",
+                        ):
+                            current_task["context"] = content_text
+
+                    current_section = next_line.replace("### ", "").strip()
+                    section_content = []
+                elif current_section and next_line.strip():
+                    section_content.append(next_line)
+
+                j += 1
+
+            # Save last section
+            if current_section and section_content:
+                content_text = "\n".join(section_content).strip()
+                if current_section == "Details":
+                    current_task["description"] = content_text
+                elif current_section in ("Context", "Implementation Context"):
+                    current_task["context"] = content_text
+
+            return current_task
+
+    return None
+
+
+def list_story_files(story_dir: Path) -> list[dict]:
+    """List all files in the story directory with descriptions."""
+    file_descriptions = {
+        "functional-spec.md": "User story requirements and acceptance criteria",
+        "technical-spec.md": "Technical design and implementation strategy",
+        "tasks.md": "Implementation tasks checklist (track progress here)",
+        "data-model.md": "Data structures and database schema",
+        "api-contract.md": "API endpoints, request/response formats",
+        "test-automation-plan.md": "Automated testing strategy and test cases",
+        "manual-testing-plan.md": "Manual testing procedures and scenarios",
+    }
+
+    files = []
+    if story_dir.exists():
+        for file in sorted(story_dir.iterdir()):
+            if file.is_file() and file.suffix == ".md":
+                description = file_descriptions.get(
+                    file.name, "Story resource file"
+                )
+                files.append({"name": file.name, "description": description})
+    return files
+
+
+# ---------------------------------------------------------------------------
+# Truth tree display (moved from commands/truth.py)
+# ---------------------------------------------------------------------------
+
+
+def build_truth_tree(directory: Path, tree: Tree) -> None:
+    """Recursively build a rich Tree from a directory."""
+    for child in sorted(directory.iterdir()):
+        if child.is_dir():
+            branch = tree.add(f"[bold]{child.name}/[/bold]")
+            build_truth_tree(child, branch)
+        else:
+            tree.add(child.name)

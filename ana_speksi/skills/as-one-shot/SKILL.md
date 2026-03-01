@@ -1,7 +1,6 @@
 ---
 name: as-one-shot
 description: Execute the entire ana-speksi workflow without stopping between phases.
-phase: null
 ---
 
 Execute the entire ana-speksi workflow from proposal through implementation
@@ -61,6 +60,7 @@ extension document using `/as-extend`. In one-shot mode, set
 as `[Implemented]` in index.md after implementing it.
 
 **Guardrails**
+
 - Code changes only during the codify phase
 - Each phase must complete fully before the next begins
 - If any phase produces results that seem wrong, pause and ask the user

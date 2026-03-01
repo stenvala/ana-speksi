@@ -1,7 +1,6 @@
 ---
 name: as-new
 description: Start a new ana-speksi change by creating a proposal. Use when the user wants to build something new or make a change.
-phase: proposal
 ---
 
 Start a new ana-speksi change by creating a proposal.
@@ -47,8 +46,9 @@ Start a new ana-speksi change by creating a proposal.
 4. **Review existing architecture**
 
    Before filling in the proposal, review the ground truth under `ana-speksi/truth/`:
-   - Explore the hierarchy to understand the system's current architecture
+   - Start with `ana-speksi/truth/index.md` for a map of all documented features
    - Check `ana-speksi/truth/platform/` for detecting relevant components, services and patterns
+   - Explore relevant feature areas identified from the index
 
    If no `ana-speksi/truth/` directory exists, note this and proceed without it.
    Understanding the existing architecture helps create more accurate proposals

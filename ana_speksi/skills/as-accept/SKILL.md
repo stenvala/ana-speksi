@@ -1,7 +1,6 @@
 ---
 name: as-accept
 description: Mark the current phase's outputs as Accepted. Run before advancing to the next phase.
-phase: null
 ---
 
 Mark the current phase's outputs as Accepted so the workflow can advance.

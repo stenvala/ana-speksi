@@ -1,7 +1,6 @@
 ---
 name: as-techify
 description: Conduct technical research and create technical specifications.
-phase: research
 ---
 
 Conduct technical research and create technical specifications for each story.
@@ -41,7 +40,7 @@ Conduct technical research and create technical specifications for each story.
 4. **Create research.md**
 
    At `ana-speksi/ongoing/<name>/research.md`, document:
-   - Relevant documentation under `ana-speksi/truth`, note that this is recursive so identify the areas, if there are no areas, let user know that too so user can steer you if you didn't find anything
+   - Relevant documentation under `ana-speksi/truth` -- start with `ana-speksi/truth/index.md` for a map of existing documentation, then explore relevant areas. Note that truth is recursive so identify the areas; if there are no areas, let user know that too so user can steer you if you didn't find anything
    - Codebase analysis findings
    - Existing patterns and integration points
    - External research (libraries, APIs, best practices, known solutions with code snippets)

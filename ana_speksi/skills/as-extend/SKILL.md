@@ -1,7 +1,6 @@
 ---
 name: as-extend
 description: Document a critical missing piece discovered during implementation as a story extension.
-phase: null
 ---
 
 Document a critical missing piece discovered during implementation. Extensions

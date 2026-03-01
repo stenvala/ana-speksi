@@ -1,7 +1,6 @@
 ---
 name: as-continue
 description: Continue working on an ana-speksi change by advancing to the next phase.
-phase: null
 ---
 
 Continue working on an ana-speksi change by advancing to the next phase.

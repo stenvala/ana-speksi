@@ -1,7 +1,6 @@
 ---
 name: as-codify
 description: Implement code changes based on the task lists. THIS IS THE ONLY PHASE WHERE CODE CHANGES ARE ALLOWED.
-phase: codify
 ---
 
 Implement code changes based on the task lists.

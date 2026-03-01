@@ -1,7 +1,6 @@
 ---
 name: as-storify
 description: Create functional specifications for each user story from the proposal.
-phase: storify
 ---
 
 Create functional specifications for each user story from the proposal.

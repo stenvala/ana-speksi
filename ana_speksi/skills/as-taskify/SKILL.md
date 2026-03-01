@@ -1,7 +1,6 @@
 ---
 name: as-taskify
 description: Create implementation tasks for each user story.
-phase: taskify
 ---
 
 Create implementation tasks for each user story.
