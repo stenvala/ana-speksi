@@ -84,27 +84,12 @@ Archive a completed spec and update the ground truth.
    The truth is a living document that represents the current state of the
    system. Merge the new spec's content into the existing truth structure.
 
-4. **Check for out-of-spec code changes**
-
-   Ask the user:
-
-   > "Were any code changes made outside of this spec's tasks (e.g., bug
-   > fixes, refactors, or features implemented independently)?"
-
-   If the user confirms there were out-of-spec changes:
-
-   > "After docufy completes and the spec is archived, you should run
-   > `/as-from-changes` to sync those code changes into the ground truth.
-   > You can point it at the relevant pull request, branch, or diff."
-
-   Proceed with archiving regardless -- this is informational only.
-
-5. **Archive the spec**
+4. **Archive the spec**
 
    Move the spec folder from `ana-speksi/ongoing/<name>/` to
    `ana-speksi/archive/<date>-<name>/` where date is `yyyy-mm-dd` format.
 
-6. **Report**
+5. **Report**
 
    Show what was archived and where truth was updated.
 

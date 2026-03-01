@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/stenvala/repos/stenvala.github/ana-speksi/**)"
+    ]
+  }
+}
