@@ -158,8 +158,8 @@ def count_tasks(tasks_path: Path) -> tuple[int, int]:
     if not tasks_path.exists():
         return 0, 0
     content = tasks_path.read_text(encoding="utf-8")
-    total = len(re.findall(r"- \[[ x]\]", content))
-    done = len(re.findall(r"- \[x\]", content))
+    total = len(re.findall(r"^- \[[ x]\]", content, re.MULTILINE))
+    done = len(re.findall(r"^- \[x\]", content, re.MULTILINE))
     return total, done
 
 
