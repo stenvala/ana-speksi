@@ -140,7 +140,37 @@ Archive a completed spec and update the ground truth.
    Move the spec folder from `ana-speksi/ongoing/<name>/` to
    `ana-speksi/archive/<date>-<name>/` where date is `yyyy-mm-dd` format.
 
-6. **Report**
+6. **Close GitHub issue (if applicable)**
+
+   Check the spec's folder name for a ticket ID (the numeric prefix in
+   `ana-speksi/ongoing/<ticket-id>.<short-name>/`). If a ticket ID exists,
+   post a closing comment summarizing the documentation updates and close
+   the issue:
+
+   ```
+   gh issue close <ticket-id> --comment "<summary>"
+   ```
+
+   The comment should summarize what was delivered and what was updated in
+   the ground truth:
+
+   > **ana-speksi: spec completed and archived for <spec-name>**
+   >
+   > **Delivered:**
+   > - <2-5 bullet points from the proposal/functional specs>
+   >
+   > **Documentation updated:**
+   > - <list truth paths that were created or updated>
+   >
+   > **Deferred (if any):**
+   > - <list deferred stories from final-verdict.md, or omit section>
+   >
+   > The branch is ready for merge.
+
+   If the `gh` command fails (e.g., no GitHub remote), log a warning but do
+   NOT block the archival workflow.
+
+7. **Report**
 
    Show what was archived and where truth was updated.
 

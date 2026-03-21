@@ -6,12 +6,14 @@ description: Start a new ana-speksi change by creating a proposal. Use when the 
 Start a new ana-speksi change by creating a proposal.
 
 **Input**: The user's description of what they want to build or change, and a ticket ID.
+If only a number is provided (e.g., `/as-new 1`), treat it as a GitHub issue number
+and fetch the description from the repository's issue.
 
 **Steps**
 
 1. **Get the ticket ID**
 
-   If no ticket ID (e.g. PROJ-123) is provided, ask the user:
+   If no ticket ID (e.g. 123) is provided, ask the user:
 
    > "What is the ticket ID for this change?"
 
@@ -19,9 +21,26 @@ Start a new ana-speksi change by creating a proposal.
 
 2. **Understand the request**
 
-   If no clear description is provided, ask the user:
+   If only a ticket ID is provided with no description, attempt to fetch the
+   GitHub issue for that ID:
 
-   > "What do you want to build or change? Describe the problem and desired outcome."
+   ```
+   gh issue view <ticket-id>
+   ```
+
+   If the issue exists, use its title and body as the description. Note in the
+   proposal's **Original Prompt** section that the source is a GitHub issue:
+
+   > Source: GitHub Issue #<ticket-id>
+
+   If the `gh` command fails (e.g., no GitHub remote, issue not found), fall back
+   to asking the user:
+
+   > "Could not fetch GitHub issue #<ticket-id>. What do you want to build or change?
+   > Describe the problem and desired outcome."
+
+   If the user provided a description alongside the ticket ID, use that description
+   as-is (do not fetch the issue).
 
    Do NOT proceed without understanding the request.
 

@@ -11,6 +11,7 @@ import typer
 from ana_speksi.cli_commands.accept import accept_command
 from ana_speksi.cli_commands.continue_cmd import continue_command
 from ana_speksi.cli_commands.init import init_command
+from ana_speksi.cli_commands.new import new_command
 from ana_speksi.cli_commands.status import status_command
 from ana_speksi.cli_commands.sync_counts import sync_counts_command
 from ana_speksi.cli_commands.truth import truth_app
@@ -26,6 +27,7 @@ app = typer.Typer(
 # Infrastructure
 app.command("init")(init_command)
 app.command("update")(update_command)
+app.command("new")(new_command)
 
 # Utility
 app.command("status")(status_command)

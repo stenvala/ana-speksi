@@ -83,6 +83,36 @@ auto-detects if there is a single ongoing spec.
    **If `auto_confirm` is `false`**: ask the user to confirm the commit
    before running it.
 
+5. **Comment on GitHub issue (if applicable)**
+
+   Check the spec's folder name for a ticket ID (the numeric prefix in
+   `ana-speksi/ongoing/<ticket-id>.<short-name>/`). If a ticket ID exists,
+   post a summary comment to the corresponding GitHub issue:
+
+   ```
+   gh issue comment <ticket-id> --body "<summary>"
+   ```
+
+   The summary should describe what was completed in the accepted phase,
+   based on the ana-speksi artifacts:
+
+   | Phase    | Summary based on                                  |
+   | -------- | ------------------------------------------------- |
+   | proposal | Key points from proposal.md                       |
+   | storify  | List of user stories from functional-spec.md files |
+   | techify  | Key technical decisions from technical-spec.md     |
+   | taskify  | Task breakdown from tasks.md files                 |
+   | codify   | Implementation summary from the codify artifacts   |
+
+   Format the comment as:
+
+   > **ana-speksi: <phase> phase accepted for <spec-name>**
+   >
+   > <2-5 bullet points summarizing the phase outputs>
+
+   If the `gh` command fails (e.g., no GitHub remote), log a warning but do
+   NOT block the acceptance workflow.
+
 **Acceptance Gates**
 
 The following gates must be passed before advancing phases:
